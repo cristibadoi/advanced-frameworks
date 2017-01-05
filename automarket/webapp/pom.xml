@@ -11,28 +11,19 @@
 	</parent>
 
 	<artifactId>webapp</artifactId>
-	<name>webapp Maven Webapp</name>
+	<name>webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.4.RELEASE</version>
 		</dependency>
 	</dependencies>
 
@@ -41,7 +32,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.6.0</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
