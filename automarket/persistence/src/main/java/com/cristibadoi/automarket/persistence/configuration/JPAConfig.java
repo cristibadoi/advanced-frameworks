@@ -18,7 +18,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories("com.cristibadoi.automarket.persistence.repositories")
+@EnableJpaRepositories("com.cristibadoi.automarket.repositories")
 @EnableTransactionManagement
 public class JPAConfig {
 
@@ -26,7 +26,7 @@ public class JPAConfig {
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
     LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
     em.setDataSource(dataSource());
-    em.setPackagesToScan(new String[] { "com.cristibadoi.automarket.persistence.entities" });
+    em.setPackagesToScan(new String[] { "com.cristibadoi.automarket.models" });
 
     JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
     em.setJpaVendorAdapter(vendorAdapter);
