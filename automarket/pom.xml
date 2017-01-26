@@ -78,9 +78,14 @@
 
 
   <modules>
+    
     <module>persistence</module>
+    <module>logic</module>
     <module>authentication</module>
-    <module>webapp</module>
+    
+    
+    
+    <module>web</module>
   </modules>
 
 </project>

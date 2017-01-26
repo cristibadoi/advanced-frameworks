@@ -10,8 +10,8 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>persistence</artifactId>
-  <name>persistence</name>
+  <artifactId>logic</artifactId>
+  <name>logic</name>
   <url>http://maven.apache.org</url>
 
   <packaging>pom</packaging>
@@ -20,9 +20,11 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <dependencies>
+  </dependencies>
 
   <build>
-    <finalName>persistence</finalName>
+    <finalName>logic</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -35,24 +37,10 @@
     </plugins>
   </build>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-entitymanager</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-    </dependency>
-  </dependencies>
-  
   <modules>
-    <module>repositories</module>
-    <module>models</module>
+    <module>services</module>
+    <module>data</module>
+    <module>converters</module>
   </modules>
 
 </project>

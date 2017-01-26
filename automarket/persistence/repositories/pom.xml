@@ -6,23 +6,30 @@
 
   <parent>
     <groupId>cristibadoi</groupId>
-    <artifactId>automarket</artifactId>
+    <artifactId>persistence</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>persistence</artifactId>
-  <name>persistence</name>
+  <artifactId>repositories</artifactId>
+  <name>repositories</name>
   <url>http://maven.apache.org</url>
 
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>cristibadoi</groupId>
+      <artifactId>models</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 
   <build>
-    <finalName>persistence</finalName>
+    <finalName>repositories</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -34,25 +41,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-entitymanager</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-    </dependency>
-  </dependencies>
-  
-  <modules>
-    <module>repositories</module>
-    <module>models</module>
-  </modules>
 
 </project>
