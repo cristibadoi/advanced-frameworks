@@ -3,14 +3,12 @@ package com.cristibadoi.automarket.persistence.models;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity
-public class FuelModel {
+public class TypeModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,13 +17,13 @@ public class FuelModel {
   @Column(unique = true, nullable = false)
   private String name;
 
-  @OneToMany(mappedBy = "fuel")
-  private List<PostModel> posts;
+  @OneToMany(mappedBy = "type")
+  private List<ModelModel> models;
 
-  public FuelModel() {
+  public TypeModel() {
   }
 
-  public FuelModel(String name) {
+  public TypeModel(String name) {
     this.name = name;
   }
 
@@ -45,12 +43,12 @@ public class FuelModel {
     this.name = name;
   }
 
-  public List<PostModel> getPosts() {
-    return posts;
+  public List<ModelModel> getModels() {
+    return models;
   }
 
-  public void setPosts(List<PostModel> posts) {
-    this.posts = posts;
+  public void setModels(List<ModelModel> models) {
+    this.models = models;
   }
 
   @Override
@@ -69,7 +67,7 @@ public class FuelModel {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    FuelModel other = (FuelModel) obj;
+    TypeModel other = (TypeModel) obj;
     if (name == null) {
       if (other.name != null)
         return false;
@@ -81,7 +79,7 @@ public class FuelModel {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("FuelModel [id=");
+    builder.append("TypeModel [id=");
     builder.append(id);
     builder.append(", name=");
     builder.append(name);

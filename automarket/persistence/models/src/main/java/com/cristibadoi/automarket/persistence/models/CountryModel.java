@@ -7,10 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class FuelModel {
+public class CountryModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,14 +21,22 @@ public class FuelModel {
   @Column(unique = true, nullable = false)
   private String name;
 
-  @OneToMany(mappedBy = "fuel")
-  private List<PostModel> posts;
+  @ManyToOne
+  @JoinColumn(name = "currency_id", referencedColumnName = "id", nullable = false)
+  private CurrencyModel currency;
 
-  public FuelModel() {
+  @OneToMany(mappedBy = "country")
+  private List<BrandModel> brands;
+
+  @OneToMany(mappedBy = "country")
+  private List<CityModel> cities;
+
+  public CountryModel() {
   }
 
-  public FuelModel(String name) {
+  public CountryModel(String name, CurrencyModel currency) {
     this.name = name;
+    this.currency = currency;
   }
 
   public long getId() {
@@ -45,12 +55,28 @@ public class FuelModel {
     this.name = name;
   }
 
-  public List<PostModel> getPosts() {
-    return posts;
+  public CurrencyModel getCurrency() {
+    return currency;
   }
 
-  public void setPosts(List<PostModel> posts) {
-    this.posts = posts;
+  public void setCurrency(CurrencyModel currency) {
+    this.currency = currency;
+  }
+
+  public List<BrandModel> getBrands() {
+    return brands;
+  }
+
+  public void setBrands(List<BrandModel> brands) {
+    this.brands = brands;
+  }
+
+  public List<CityModel> getCities() {
+    return cities;
+  }
+
+  public void setCities(List<CityModel> cities) {
+    this.cities = cities;
   }
 
   @Override
@@ -69,7 +95,7 @@ public class FuelModel {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    FuelModel other = (FuelModel) obj;
+    CountryModel other = (CountryModel) obj;
     if (name == null) {
       if (other.name != null)
         return false;
@@ -81,10 +107,12 @@ public class FuelModel {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("FuelModel [id=");
+    builder.append("CountryModel [id=");
     builder.append(id);
     builder.append(", name=");
     builder.append(name);
+    builder.append(", currency=");
+    builder.append(currency);
     builder.append("]");
     return builder.toString();
   }

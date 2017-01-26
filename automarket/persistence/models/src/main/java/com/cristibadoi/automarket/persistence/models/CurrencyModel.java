@@ -10,23 +10,26 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class FuelModel {
+public class CurrencyModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
   @Column(unique = true, nullable = false)
-  private String name;
+  private String code;
 
-  @OneToMany(mappedBy = "fuel")
+  @OneToMany(mappedBy = "currency")
+  private List<CountryModel> countries;
+
+  @OneToMany(mappedBy = "currency")
   private List<PostModel> posts;
 
-  public FuelModel() {
+  public CurrencyModel() {
   }
 
-  public FuelModel(String name) {
-    this.name = name;
+  public CurrencyModel(String code) {
+    this.code = code;
   }
 
   public long getId() {
@@ -37,12 +40,20 @@ public class FuelModel {
     this.id = id;
   }
 
-  public String getName() {
-    return name;
+  public String getCode() {
+    return code;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public List<CountryModel> getCountries() {
+    return countries;
+  }
+
+  public void setCountries(List<CountryModel> countries) {
+    this.countries = countries;
   }
 
   public List<PostModel> getPosts() {
@@ -57,7 +68,7 @@ public class FuelModel {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + ((code == null) ? 0 : code.hashCode());
     return result;
   }
 
@@ -69,11 +80,11 @@ public class FuelModel {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    FuelModel other = (FuelModel) obj;
-    if (name == null) {
-      if (other.name != null)
+    CurrencyModel other = (CurrencyModel) obj;
+    if (code == null) {
+      if (other.code != null)
         return false;
-    } else if (!name.equals(other.name))
+    } else if (!code.equals(other.code))
       return false;
     return true;
   }
@@ -81,10 +92,12 @@ public class FuelModel {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("FuelModel [id=");
+    builder.append("CurrencyModel [id=");
     builder.append(id);
-    builder.append(", name=");
-    builder.append(name);
+    builder.append(", code=");
+    builder.append(code);
+    builder.append(", countries=");
+    builder.append(countries);
     builder.append("]");
     return builder.toString();
   }

@@ -7,10 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class FuelModel {
+public class BrandModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,14 +21,22 @@ public class FuelModel {
   @Column(unique = true, nullable = false)
   private String name;
 
-  @OneToMany(mappedBy = "fuel")
+  @ManyToOne
+  @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
+  private CountryModel country;
+
+  @OneToMany(mappedBy = "brand")
+  private List<ModelModel> models;
+
+  @OneToMany(mappedBy = "brand")
   private List<PostModel> posts;
 
-  public FuelModel() {
+  public BrandModel() {
   }
 
-  public FuelModel(String name) {
+  public BrandModel(String name, CountryModel country) {
     this.name = name;
+    this.country = country;
   }
 
   public long getId() {
@@ -43,6 +53,22 @@ public class FuelModel {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public CountryModel getCountry() {
+    return country;
+  }
+
+  public void setCountry(CountryModel country) {
+    this.country = country;
+  }
+
+  public List<ModelModel> getModels() {
+    return models;
+  }
+
+  public void setModels(List<ModelModel> models) {
+    this.models = models;
   }
 
   public List<PostModel> getPosts() {
@@ -69,7 +95,7 @@ public class FuelModel {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    FuelModel other = (FuelModel) obj;
+    BrandModel other = (BrandModel) obj;
     if (name == null) {
       if (other.name != null)
         return false;
@@ -81,10 +107,12 @@ public class FuelModel {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("FuelModel [id=");
+    builder.append("BrandModel [id=");
     builder.append(id);
     builder.append(", name=");
     builder.append(name);
+    builder.append(", country=");
+    builder.append(country);
     builder.append("]");
     return builder.toString();
   }

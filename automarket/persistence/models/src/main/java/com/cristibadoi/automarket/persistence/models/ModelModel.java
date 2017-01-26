@@ -7,10 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class FuelModel {
+public class ModelModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,14 +21,24 @@ public class FuelModel {
   @Column(unique = true, nullable = false)
   private String name;
 
-  @OneToMany(mappedBy = "fuel")
+  @ManyToOne
+  @JoinColumn(name = "brand_id", referencedColumnName = "id", nullable = false)
+  private BrandModel brand;
+
+  @ManyToOne
+  @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
+  private TypeModel type;
+
+  @OneToMany(mappedBy = "model")
   private List<PostModel> posts;
 
-  public FuelModel() {
+  public ModelModel() {
   }
 
-  public FuelModel(String name) {
+  public ModelModel(String name, BrandModel brand, TypeModel type) {
     this.name = name;
+    this.brand = brand;
+    this.type = type;
   }
 
   public long getId() {
@@ -45,6 +57,22 @@ public class FuelModel {
     this.name = name;
   }
 
+  public BrandModel getBrand() {
+    return brand;
+  }
+
+  public void setBrand(BrandModel brand) {
+    this.brand = brand;
+  }
+
+  public TypeModel getType() {
+    return type;
+  }
+
+  public void setType(TypeModel type) {
+    this.type = type;
+  }
+
   public List<PostModel> getPosts() {
     return posts;
   }
@@ -57,6 +85,7 @@ public class FuelModel {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((brand == null) ? 0 : brand.hashCode());
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     return result;
   }
@@ -69,7 +98,12 @@ public class FuelModel {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    FuelModel other = (FuelModel) obj;
+    ModelModel other = (ModelModel) obj;
+    if (brand == null) {
+      if (other.brand != null)
+        return false;
+    } else if (!brand.equals(other.brand))
+      return false;
     if (name == null) {
       if (other.name != null)
         return false;
@@ -81,10 +115,14 @@ public class FuelModel {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("FuelModel [id=");
+    builder.append("ModelModel [id=");
     builder.append(id);
     builder.append(", name=");
     builder.append(name);
+    builder.append(", brand=");
+    builder.append(brand);
+    builder.append(", type=");
+    builder.append(type);
     builder.append("]");
     return builder.toString();
   }

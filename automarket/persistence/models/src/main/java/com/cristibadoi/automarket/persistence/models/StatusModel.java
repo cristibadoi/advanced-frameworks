@@ -3,14 +3,12 @@ package com.cristibadoi.automarket.persistence.models;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity
-public class FuelModel {
+public class StatusModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,13 +17,13 @@ public class FuelModel {
   @Column(unique = true, nullable = false)
   private String name;
 
-  @OneToMany(mappedBy = "fuel")
+  @OneToMany(mappedBy = "status")
   private List<PostModel> posts;
 
-  public FuelModel() {
+  public StatusModel() {
   }
 
-  public FuelModel(String name) {
+  public StatusModel(String name) {
     this.name = name;
   }
 
@@ -69,7 +67,7 @@ public class FuelModel {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    FuelModel other = (FuelModel) obj;
+    StatusModel other = (StatusModel) obj;
     if (name == null) {
       if (other.name != null)
         return false;
@@ -81,7 +79,7 @@ public class FuelModel {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("FuelModel [id=");
+    builder.append("StatusModel [id=");
     builder.append(id);
     builder.append(", name=");
     builder.append(name);
