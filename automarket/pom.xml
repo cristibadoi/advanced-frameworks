@@ -22,6 +22,8 @@
     <junit-version>4.12</junit-version>
     <slf4j-version>1.7.22</slf4j-version>
     <log4j-version>2.7</log4j-version>
+    <maven-compiler-plugin-version>3.6.0</maven-compiler-plugin-version>
+    <java-compiler-version>1.8</java-compiler-version>
   </properties>
 
   <dependencyManagement>
@@ -82,6 +84,19 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <finalName>web</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin-version}</version>
+        <configuration>
+          <source>${java-compiler-version}</source>
+          <target>${java-compiler-version}</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
   <modules>
     <module>persistence</module>
