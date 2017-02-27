@@ -1,15 +1,14 @@
 package com.cristibadoi.automarket.logic.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cristibadoi.automarket.logic.converters.ModelConverter;
-import com.cristibadoi.automarket.logic.converters.PostConverter;
-import com.cristibadoi.automarket.logic.data.ModelData;
+import com.cristibadoi.automarket.logic.converters.EntityConverter;
 import com.cristibadoi.automarket.logic.data.PostData;
+import com.cristibadoi.automarket.logic.query.QueryDetails;
+import com.cristibadoi.automarket.persistence.models.PostModel;
 import com.cristibadoi.automarket.persistence.repositories.PostRepository;
 
 @Service
@@ -19,15 +18,11 @@ public class PostSearchService {
   PostRepository postRepository;
 
   @Autowired
-  PostConverter postConverter;
+  EntityConverter<PostModel, PostData> postConverter;
 
-  @Autowired
-  ModelConverter modelConverter;
-
-  public List<PostData> findByModel(ModelData model) {
-    List<PostData> results = new ArrayList<PostData>();
-    results.addAll(postConverter.convertPosts(postRepository.findByModel(modelConverter.convertModel(model))));
-    return results;
+  public List<PostData> getMatchingPosts(QueryDetails queryDetails) {
+    //return postConverter.convertModelToDataList(result);
+    return null;
   }
 
 }
