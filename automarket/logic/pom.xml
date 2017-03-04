@@ -18,7 +18,6 @@
     <module>services</module>
     <module>data</module>
     <module>converters</module>
-    <module>query</module>
   </modules>
 
 </project>

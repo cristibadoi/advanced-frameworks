@@ -1,4 +1,4 @@
-package com.cristibadoi.automarket.logic.query;
+package com.cristibadoi.automarket.logic.services;
 
 public class QueryDetails {
 

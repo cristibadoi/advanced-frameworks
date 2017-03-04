@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cristibadoi.automarket.logic.query.QueryDetails;
 import com.cristibadoi.automarket.logic.services.PostSearchService;
+import com.cristibadoi.automarket.logic.services.QueryDetails;
 
 @Controller
 @RequestMapping("/search")
