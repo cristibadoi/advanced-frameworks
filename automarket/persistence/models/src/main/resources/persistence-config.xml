@@ -14,7 +14,7 @@
   <!-- DATABASE -->
   <bean id="dataSource"
     class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
     <property name="url" value="jdbc:mysql://localhost:3306/cristibadoi" />
     <property name="username" value="root" />
     <property name="password" value="1234" />
@@ -29,16 +29,18 @@
     class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="dataSource" />
     <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
-    
+
     <!-- ENTITY PACKAGE -->
-    <property name="packagesToScan" value="com.cristibadoi.automarket.persistence.models" />
-    
+    <property name="packagesToScan"
+      value="com.cristibadoi.automarket.persistence.models" />
+
     <!-- HIBERNATE SETTINGS -->
     <property name="jpaProperties">
       <props>
         <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-        <prop key="hibernate.ejb.naming_strategy">org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl</prop>
-        <prop key="hibernate.hbm2ddl.auto">create-update</prop>
+        <prop key="hibernate.physical_naming_strategy">com.cristibadoi.automarket.persistence.naming.CustomNamingStrategy
+        </prop>
+        <prop key="hibernate.hbm2ddl.auto">validate</prop>
         <prop key="hibernate.show_sql">false</prop>
         <prop key="hibernate.format_sql">false</prop>
         <prop key="use_sql_comments">true</prop>
@@ -52,6 +54,7 @@
   </bean>
 
   <!-- REPOSITORIES -->
-  <jpa:repositories base-package="com.cristibadoi.automarket.persistence.repositories" />
+  <jpa:repositories
+    base-package="com.cristibadoi.automarket.persistence.repositories" />
 
 </beans>

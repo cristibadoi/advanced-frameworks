@@ -1,15 +1,19 @@
-package com.cristibadoi.automarket.logic.services;
+package com.cristibadoi.automarket.logic.query;
+
+import org.springframework.stereotype.Component;
 
 import com.cristibadoi.automarket.persistence.models.QPostModel;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
+@Component
 public class PostPredicates {
 
-  private PostPredicates() {
+  public PostPredicates() {
   }
 
-  static Predicate createPredicate(QueryDetails queryDetails) {
+  public Predicate createPredicate(QueryDetails queryDetails) {
+
     QPostModel post = QPostModel.postModel;
     BooleanBuilder builder = new BooleanBuilder();
 
@@ -54,6 +58,7 @@ public class PostPredicates {
     }
 
     return builder.getValue();
+
   }
 
 }

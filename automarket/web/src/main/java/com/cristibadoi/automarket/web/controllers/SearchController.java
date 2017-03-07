@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cristibadoi.automarket.logic.query.QueryDetails;
 import com.cristibadoi.automarket.logic.services.PostSearchService;
-import com.cristibadoi.automarket.logic.services.QueryDetails;
+import com.cristibadoi.automarket.logic.data.PostData;
 
 @Controller
 @RequestMapping("/search")
@@ -17,18 +18,9 @@ public class SearchController {
   @Autowired
   PostSearchService service;
 
-  @RequestMapping(method = RequestMethod.GET)
-  public ModelAndView searchPost(@RequestBody QueryDetails searchData) {
-
-    String searchResults = "results";
-    return new ModelAndView("search", "results", searchResults);
-  }
-
   @RequestMapping(method = RequestMethod.POST)
-  public ModelAndView publishPost(@RequestBody QueryDetails publishData) {
-
-    String searchResults = "results";
-    return new ModelAndView("search", "results", searchResults);
+  public ModelAndView searchPosts(@RequestBody QueryDetails queryDetails) {
+    return new ModelAndView("search", "searchResults", service.getMatchingPosts(queryDetails));
   }
 
 }

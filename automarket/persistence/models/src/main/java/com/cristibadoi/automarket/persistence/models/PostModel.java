@@ -7,12 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "post")
 public class PostModel {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @Column(nullable = false)
@@ -37,10 +39,10 @@ public class PostModel {
   private String images;
 
   @Column(nullable = false)
-  private int publicationDate;
-
-  @Column(nullable = false)
   private int cylindricalCapacity;
+  
+  @Column(nullable = false)
+  private int publicationDate;
 
   @ManyToOne
   @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
