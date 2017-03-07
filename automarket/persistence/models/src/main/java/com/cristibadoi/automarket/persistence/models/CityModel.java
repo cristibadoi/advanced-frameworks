@@ -14,11 +14,11 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "country_id" }) })
+@Table(name = "city", uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "country_id" }) })
 public class CityModel {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @Column(nullable = false)

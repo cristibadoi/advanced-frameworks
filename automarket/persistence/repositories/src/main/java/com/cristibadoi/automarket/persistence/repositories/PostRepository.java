@@ -2,6 +2,7 @@ package com.cristibadoi.automarket.persistence.repositories;
 
 import java.util.List;
 
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 import com.cristibadoi.automarket.persistence.models.BrandModel;
@@ -13,7 +14,7 @@ import com.cristibadoi.automarket.persistence.models.PostModel;
 import com.cristibadoi.automarket.persistence.models.StatusModel;
 import com.cristibadoi.automarket.persistence.models.UserModel;
 
-public interface PostRepository extends CrudRepository<PostModel, Long> {
+public interface PostRepository extends CrudRepository<PostModel, Long>, QueryDslPredicateExecutor<PostModel> {
 
   public List<PostModel> findByUser(UserModel user);
 

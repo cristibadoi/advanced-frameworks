@@ -1,6 +1,6 @@
 package com.cristibadoi.automarket.logic.converters;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -9,22 +9,35 @@ import com.cristibadoi.automarket.logic.data.PostData;
 import com.cristibadoi.automarket.persistence.models.PostModel;
 
 @Component
-public class PostConverter {
+public class PostConverter implements EntityConverter<PostModel, PostData> {
 
-  public PostData convertPost(PostModel post) {
+  @Override
+  public PostData convertModelToData(PostModel model) {
     PostData result = new PostData();
-    
+    result.setModelYear(model.getModelYear());
+    result.setMileage(model.getMileage());
+    result.setPrice(model.getPrice());
+    result.setPhoneNumber(model.getPhoneNumber());
+    result.setEmail(model.getEmail());
+    result.setDescription(model.getDescription());
+    result.setImages(model.getImages());
+    result.setPublicationDate(model.getPublicationDate());
+    result.setCylindricalCapacity(model.getCylindricalCapacity());
+    result.setBrandName(model.getBrand().getName());
+    result.setModelName(model.getModel().getName());
+    result.setFuelName(model.getFuel().getName());
+    result.setCityName(model.getCity().getName());
+    result.setCurrencyCode(model.getCurrency().getCode());
     return result;
   }
-  
-  public List<PostData> convertPosts(List<PostModel> posts) {
-    List<PostData> result = new ArrayList<PostData>();
-    
-    for (PostModel p : posts) {
-      result.add(convertPost(p));
+
+  @Override
+  public List<PostData> convertModelToDataList(List<PostModel> list) {
+    List<PostData> result= new LinkedList<PostData>();
+    for (PostModel p : list) {
+      result.add(convertModelToData(p));
     }
-    
     return result;
   }
-  
+
 }
