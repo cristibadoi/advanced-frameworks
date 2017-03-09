@@ -46,11 +46,6 @@
       <artifactId>repositories</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>cristibadoi</groupId>
-      <artifactId>query</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
   </dependencies>
 
 
