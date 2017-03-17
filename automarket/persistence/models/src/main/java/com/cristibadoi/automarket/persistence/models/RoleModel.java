@@ -7,12 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "type")
-public class TypeModel {
+@Table(name = "role")
+public class RoleModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,14 +21,10 @@ public class TypeModel {
   @Column(unique = true, nullable = false)
   private String name;
 
-  @OneToMany(mappedBy = "type")
-  private List<ModelModel> models;
+  @ManyToMany(mappedBy = "roles")
+  private List<UserModel> users;
 
-  public TypeModel() {
-  }
-
-  public TypeModel(String name) {
-    this.name = name;
+  public RoleModel() {
   }
 
   public long getId() {
@@ -47,12 +43,12 @@ public class TypeModel {
     this.name = name;
   }
 
-  public List<ModelModel> getModels() {
-    return models;
+  public List<UserModel> getUsers() {
+    return users;
   }
 
-  public void setModels(List<ModelModel> models) {
-    this.models = models;
+  public void setUsers(List<UserModel> users) {
+    this.users = users;
   }
 
   @Override
@@ -71,7 +67,7 @@ public class TypeModel {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    TypeModel other = (TypeModel) obj;
+    RoleModel other = (RoleModel) obj;
     if (id != other.id)
       return false;
     return true;
@@ -80,10 +76,12 @@ public class TypeModel {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("TypeModel [id=");
+    builder.append("RoleModel [id=");
     builder.append(id);
     builder.append(", name=");
     builder.append(name);
+    builder.append(", users=");
+    builder.append(users);
     builder.append("]");
     return builder.toString();
   }

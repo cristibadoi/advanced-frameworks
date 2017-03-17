@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cristibadoi.automarket.logic.services.PostSearchService;
 import com.cristibadoi.automarket.logic.query.QueryDetails;
+import com.cristibadoi.automarket.logic.services.PostService;
 
 @Controller
 @RequestMapping("/search")
 public class SearchController {
 
   @Autowired
-  PostSearchService service;
-
+  PostService service;
+  
   @RequestMapping(method = RequestMethod.POST)
-  public ModelAndView searchPosts(@RequestBody QueryDetails queryDetails) {
-    return new ModelAndView("search", "searchResults", service.getMatchingPosts(queryDetails));
+  public ModelAndView searchResults(@RequestBody QueryDetails queryDetails) {
+    return new ModelAndView("search-results", "searchResults", service.getMatchingPosts(queryDetails));
   }
 
 }

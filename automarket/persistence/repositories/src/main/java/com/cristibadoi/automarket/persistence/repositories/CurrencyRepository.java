@@ -6,6 +6,6 @@ import com.cristibadoi.automarket.persistence.models.CurrencyModel;
 
 public interface CurrencyRepository extends CrudRepository<CurrencyModel, Long> {
 
-  public CurrencyModel findByCode(String code);
+  CurrencyModel findByCode(String code);
 
 }

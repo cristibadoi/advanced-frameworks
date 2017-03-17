@@ -25,13 +25,18 @@
     <maven-compiler-plugin-version>3.6.0</maven-compiler-plugin-version>
     <java-compiler-version>1.8</java-compiler-version>
     <querydsl-jpa-version>4.1.4</querydsl-jpa-version>
-    <jstl-version>1.2</jstl-version>
     <jackson-core-version>2.8.7</jackson-core-version>
     <jackson-databind-version>2.8.7</jackson-databind-version>
+    <bootstrap-version>3.3.7-1</bootstrap-version>
+    <webjars-locator-version>0.32</webjars-locator-version>
+    <jstl-version>1.2</jstl-version>
+    <spring-security-version>4.2.2.RELEASE</spring-security-version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+
+      <!-- Spring -->
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
@@ -52,6 +57,8 @@
         <artifactId>spring-context</artifactId>
         <version>${spring-context-version}</version>
       </dependency>
+
+      <!-- Database -->
       <dependency>
         <groupId>org.eclipse.persistence</groupId>
         <artifactId>javax.persistence</artifactId>
@@ -67,16 +74,15 @@
         <artifactId>hibernate-entitymanager</artifactId>
         <version>${hibernate-entitymanager-version}</version>
       </dependency>
+
+      <!-- QueryDSL -->
       <dependency>
         <groupId>com.querydsl</groupId>
         <artifactId>querydsl-jpa</artifactId>
         <version>${querydsl-jpa-version}</version>
       </dependency>
-      <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>jstl</artifactId>
-        <version>${jstl-version}</version>
-      </dependency>
+
+      <!-- Jackson JSON -->
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
@@ -87,15 +93,58 @@
         <artifactId>jackson-databind</artifactId>
         <version>${jackson-databind-version}</version>
       </dependency>
+
+      <!-- Webjars -->
+      <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>bootstrap</artifactId>
+        <version>${bootstrap-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>webjars-locator</artifactId>
+        <version>${webjars-locator-version}</version>
+      </dependency>
+
+      <!-- JSTL -->
+      <dependency>
+        <groupId>jstl</groupId>
+        <artifactId>jstl</artifactId>
+        <version>${jstl-version}</version>
+      </dependency>
+
+      <!-- Spring Security -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${spring-security-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-config</artifactId>
+        <version>${spring-security-version}</version>
+      </dependency>
+
+      <!-- Spring Security JSP Taglib -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-taglibs</artifactId>
+        <version>${spring-security-version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
+
+    <!-- Testing -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit-version}</version>
     </dependency>
+
+    <!-- Logging -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -106,6 +155,7 @@
       <artifactId>log4j-api</artifactId>
       <version>${log4j-version}</version>
     </dependency>
+
   </dependencies>
 
   <build>

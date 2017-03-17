@@ -16,42 +16,42 @@ import com.cristibadoi.automarket.persistence.models.UserModel;
 
 public interface PostRepository extends CrudRepository<PostModel, Long>, QueryDslPredicateExecutor<PostModel> {
 
-  public List<PostModel> findByUser(UserModel user);
+  List<PostModel> findByUser(UserModel user);
 
-  public List<PostModel> findByModel(ModelModel model);
+  List<PostModel> findByModel(ModelModel model);
 
-  public List<PostModel> findByBrand(BrandModel brand);
+  List<PostModel> findByBrand(BrandModel brand);
 
-  public List<PostModel> findByCity(CityModel city);
+  List<PostModel> findByCity(CityModel city);
 
-  public List<PostModel> findByStatus(StatusModel status);
+  List<PostModel> findByStatus(StatusModel status);
 
-  public List<PostModel> findByCurrency(CurrencyModel currency);
+  List<PostModel> findByCurrency(CurrencyModel currency);
 
-  public List<PostModel> findByFuel(FuelModel fuel);
+  List<PostModel> findByFuel(FuelModel fuel);
 
-  public List<PostModel> findByModelYearGreaterThan(int modelYear);
+  List<PostModel> findByModelYearGreaterThan(int modelYear);
 
-  public List<PostModel> findByModelYearLessThan(int modelYear);
+  List<PostModel> findByModelYearLessThan(int modelYear);
 
-  public List<PostModel> findByModelYearBetween(int lowLimit, int highLimit);
+  List<PostModel> findByModelYearBetween(int lowLimit, int highLimit);
 
-  public List<PostModel> findByMileageGreaterThan(int mileage);
+  List<PostModel> findByMileageGreaterThan(int mileage);
 
-  public List<PostModel> findByMileageLessThan(int mileage);
+  List<PostModel> findByMileageLessThan(int mileage);
 
-  public List<PostModel> findByMileageBetween(int lowLimit, int highLimit);
+  List<PostModel> findByMileageBetween(int lowLimit, int highLimit);
 
-  public List<PostModel> findByPublicationDateGreaterThan(int publicatioNDate);
+  List<PostModel> findByPublicationDateGreaterThan(int publicatioNDate);
 
-  public List<PostModel> findByPublicationDateLessThan(int publicationDate);
+  List<PostModel> findByPublicationDateLessThan(int publicationDate);
 
-  public List<PostModel> findByPublicationDateBetween(int lowLimit, int highLimit);
+  List<PostModel> findByPublicationDateBetween(int lowLimit, int highLimit);
 
-  public List<PostModel> findByCylindricalCapacityGreaterThan(int cylindricalCapacity);
+  List<PostModel> findByCylindricalCapacityGreaterThan(int cylindricalCapacity);
 
-  public List<PostModel> findByCylindricalCapacityLessThan(int cylindricalCapacity);
+  List<PostModel> findByCylindricalCapacityLessThan(int cylindricalCapacity);
 
-  public List<PostModel> findByCylindricalCapacityBetween(int lowLimit, int highLimit);
+  List<PostModel> findByCylindricalCapacityBetween(int lowLimit, int highLimit);
 
 }

@@ -40,7 +40,7 @@ public class PostModel {
 
   @Column(nullable = false)
   private int cylindricalCapacity;
-  
+
   @Column(nullable = false)
   private int publicationDate;
 

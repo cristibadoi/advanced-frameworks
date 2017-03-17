@@ -9,12 +9,12 @@ import com.cristibadoi.automarket.persistence.models.UserModel;
 
 public interface MessageRepository extends CrudRepository<MessageModel, Long> {
 
-  public MessageModel findById(long id);
+  MessageModel findById(long id);
 
-  public List<MessageModel> findBySender(UserModel sender);
+  List<MessageModel> findBySender(UserModel sender);
 
-  public List<MessageModel> findByReceiver(UserModel receiver);
+  List<MessageModel> findByReceiver(UserModel receiver);
 
-  public List<MessageModel> findBySenderAndReceiver(UserModel sender, UserModel receiver);
+  List<MessageModel> findBySenderAndReceiver(UserModel sender, UserModel receiver);
 
 }

@@ -9,8 +9,8 @@ import com.cristibadoi.automarket.persistence.models.CurrencyModel;
 
 public interface CountryRepository extends CrudRepository<CountryModel, Long> {
 
-  public CountryModel findByName(String name);
+  CountryModel findByName(String name);
 
-  public List<CountryModel> findByCurrency(CurrencyModel currency);
+  List<CountryModel> findByCurrency(CurrencyModel currency);
 
 }

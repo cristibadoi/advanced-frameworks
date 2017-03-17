@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,8 +24,14 @@ public class UserModel {
   @Column(unique = true, nullable = false)
   private String email;
 
+  @Column(unique = true, nullable = false)
+  private String username;
+
   @Column(nullable = false)
   private String password;
+
+  @Column(nullable = false)
+  private boolean enabled;
 
   @OneToMany(mappedBy = "user")
   private List<PostModel> posts;
@@ -32,6 +41,10 @@ public class UserModel {
 
   @OneToMany(mappedBy = "receiver")
   private List<MessageModel> receivedMessages;
+
+  @ManyToMany
+  @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+  private List<RoleModel> roles;
 
   public UserModel() {
   }
@@ -57,12 +70,28 @@ public class UserModel {
     this.email = email;
   }
 
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
   public String getPassword() {
     return password;
   }
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public boolean isEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
   }
 
   public List<PostModel> getPosts() {
@@ -89,11 +118,19 @@ public class UserModel {
     this.receivedMessages = receivedMessages;
   }
 
+  public List<RoleModel> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(List<RoleModel> roles) {
+    this.roles = roles;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((email == null) ? 0 : email.hashCode());
+    result = prime * result + (int) (id ^ (id >>> 32));
     return result;
   }
 
@@ -106,10 +143,7 @@ public class UserModel {
     if (getClass() != obj.getClass())
       return false;
     UserModel other = (UserModel) obj;
-    if (email == null) {
-      if (other.email != null)
-        return false;
-    } else if (!email.equals(other.email))
+    if (id != other.id)
       return false;
     return true;
   }
@@ -121,8 +155,12 @@ public class UserModel {
     builder.append(id);
     builder.append(", email=");
     builder.append(email);
+    builder.append(", username=");
+    builder.append(username);
     builder.append(", password=");
     builder.append(password);
+    builder.append(", enabled=");
+    builder.append(enabled);
     builder.append("]");
     return builder.toString();
   }
