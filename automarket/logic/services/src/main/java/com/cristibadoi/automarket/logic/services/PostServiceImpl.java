@@ -3,7 +3,7 @@ package com.cristibadoi.automarket.logic.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.cristibadoi.automarket.logic.converters.EntityConverter;
 import com.cristibadoi.automarket.logic.data.PostData;
@@ -13,8 +13,8 @@ import com.cristibadoi.automarket.persistence.models.PostModel;
 import com.cristibadoi.automarket.persistence.repositories.PostRepository;
 import com.google.common.collect.Lists;
 
-@Component
-public class PostSearchServiceImpl implements PostSearchService{
+@Service
+public class PostServiceImpl implements PostService {
 
   @Autowired
   private PostRepository postRepository;

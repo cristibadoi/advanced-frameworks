@@ -70,13 +70,12 @@ public class CityModel {
   public void setPosts(List<PostModel> posts) {
     this.posts = posts;
   }
-
+  
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((country == null) ? 0 : country.hashCode());
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + (int) (id ^ (id >>> 32));
     return result;
   }
 
@@ -89,15 +88,7 @@ public class CityModel {
     if (getClass() != obj.getClass())
       return false;
     CityModel other = (CityModel) obj;
-    if (country == null) {
-      if (other.country != null)
-        return false;
-    } else if (!country.equals(other.country))
-      return false;
-    if (name == null) {
-      if (other.name != null)
-        return false;
-    } else if (!name.equals(other.name))
+    if (id != other.id)
       return false;
     return true;
   }
@@ -111,6 +102,8 @@ public class CityModel {
     builder.append(name);
     builder.append(", country=");
     builder.append(country);
+    builder.append(", posts=");
+    builder.append(posts);
     builder.append("]");
     return builder.toString();
   }

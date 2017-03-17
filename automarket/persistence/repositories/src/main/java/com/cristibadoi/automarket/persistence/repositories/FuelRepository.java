@@ -6,6 +6,6 @@ import com.cristibadoi.automarket.persistence.models.FuelModel;
 
 public interface FuelRepository extends CrudRepository<FuelModel, Long> {
 
-  public FuelModel findByName(String name);
+  FuelModel findByName(String name);
 
 }

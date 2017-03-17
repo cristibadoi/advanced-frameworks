@@ -9,8 +9,8 @@ import com.cristibadoi.automarket.persistence.models.CountryModel;
 
 public interface CityRepository extends CrudRepository<CityModel, Long> {
 
-  public CityModel findByName(String name);
+  CityModel findByName(String name);
 
-  public List<CityModel> findByCountry(CountryModel country);
+  List<CityModel> findByCountry(CountryModel country);
 
 }

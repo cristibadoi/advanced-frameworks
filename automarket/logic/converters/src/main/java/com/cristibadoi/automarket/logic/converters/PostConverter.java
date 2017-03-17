@@ -33,7 +33,7 @@ public class PostConverter implements EntityConverter<PostModel, PostData> {
 
   @Override
   public List<PostData> convertModelToDataList(List<PostModel> list) {
-    List<PostData> result= new LinkedList<PostData>();
+    List<PostData> result = new LinkedList<PostData>();
     for (PostModel p : list) {
       result.add(convertModelToData(p));
     }

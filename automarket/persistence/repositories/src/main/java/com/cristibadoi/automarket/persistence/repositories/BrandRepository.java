@@ -8,9 +8,9 @@ import com.cristibadoi.automarket.persistence.models.BrandModel;
 import com.cristibadoi.automarket.persistence.models.CountryModel;
 
 public interface BrandRepository extends CrudRepository<BrandModel, Long> {
-  
-  public BrandModel findByName(String name);
-  
-  public List<BrandModel> findByCountry(CountryModel country);
+
+  BrandModel findByName(String name);
+
+  List<BrandModel> findByCountry(CountryModel country);
 
 }

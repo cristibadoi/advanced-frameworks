@@ -19,7 +19,7 @@ public class MessageModel {
 
   @Column(nullable = false)
   private String text;
-  
+
   @Column(nullable = false)
   private int date;
 

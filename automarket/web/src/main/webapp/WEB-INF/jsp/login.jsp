@@ -1,10 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <html>
 <head>
 <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
-<title>Automarket</title>
+<title>Automarket - Login</title>
 <link rel="stylesheet"
 	href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
 </head>

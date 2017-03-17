@@ -6,6 +6,6 @@ import com.cristibadoi.automarket.persistence.models.StatusModel;
 
 public interface StatusRepository extends CrudRepository<StatusModel, Long> {
 
-  public StatusModel findByName(String name);
+  StatusModel findByName(String name);
 
 }

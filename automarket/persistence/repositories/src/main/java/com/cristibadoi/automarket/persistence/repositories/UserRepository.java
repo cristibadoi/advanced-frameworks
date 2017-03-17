@@ -6,6 +6,8 @@ import com.cristibadoi.automarket.persistence.models.UserModel;
 
 public interface UserRepository extends CrudRepository<UserModel, Long> {
 
-  public UserModel findByEmail(String email);
+  UserModel findByEmail(String email);
+
+  UserModel findByUsername(String username);
 
 }
