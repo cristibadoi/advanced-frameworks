@@ -4,24 +4,26 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <html>
+
 <head>
 <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 <script src="resources/js/login.js"></script>
-<title>Automarket - Login</title>
+<title><spring:message code="label.login-title" /></title>
 <link rel="stylesheet"
 	href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
 <link rel="stylesheet" href="resources/css/login.css" />
 </head>
+
 <body>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="<c:url value="/" />">Automarket</a>
+				<a class="navbar-brand" href="<c:url value="/" />"><spring:message code="label.menu-home-button" /></a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="<c:url value="/login" />">Login</a></li>
-				<li><a href="<c:url value="/publish" />">Publish</a></li>
+				<li><a href="<c:url value="/login" />"><spring:message code="label.menu-login-button" /></a></li>
+				<li><a href="<c:url value="/publish" />"><spring:message code="label.menu-publish-button" /></a></li>
 			</ul>
 		</div>
 	</nav>
@@ -115,7 +117,6 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 
 </html>

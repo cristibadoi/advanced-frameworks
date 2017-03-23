@@ -41,6 +41,9 @@ public class PostPredicates {
     if (queryDetails.getMaxPrice() != 0) {
       builder.and(post.price.loe(queryDetails.getMaxPrice()));
     }
+    if (queryDetails.getType() != null) {
+      builder.and(post.type.name.equalsIgnoreCase(queryDetails.getType()));
+    }
     if (queryDetails.getCurrency() != null) {
       builder.and(post.currency.code.equalsIgnoreCase(queryDetails.getCurrency()));
     }

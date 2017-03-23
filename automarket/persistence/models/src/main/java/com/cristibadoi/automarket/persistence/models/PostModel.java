@@ -57,6 +57,10 @@ public class PostModel {
   private ModelModel model;
 
   @ManyToOne
+  @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
+  private TypeModel type;
+
+  @ManyToOne
   @JoinColumn(name = "fuel_id", referencedColumnName = "id", nullable = false)
   private FuelModel fuel;
 
@@ -179,6 +183,14 @@ public class PostModel {
     this.model = model;
   }
 
+  public TypeModel getType() {
+    return type;
+  }
+
+  public void setType(TypeModel type) {
+    this.type = type;
+  }
+
   public FuelModel getFuel() {
     return fuel;
   }
@@ -252,16 +264,18 @@ public class PostModel {
     builder.append(description);
     builder.append(", images=");
     builder.append(images);
-    builder.append(", publicationDate=");
-    builder.append(publicationDate);
     builder.append(", cylindricalCapacity=");
     builder.append(cylindricalCapacity);
+    builder.append(", publicationDate=");
+    builder.append(publicationDate);
     builder.append(", user=");
     builder.append(user);
     builder.append(", brand=");
     builder.append(brand);
     builder.append(", model=");
     builder.append(model);
+    builder.append(", type=");
+    builder.append(type);
     builder.append(", fuel=");
     builder.append(fuel);
     builder.append(", city=");
