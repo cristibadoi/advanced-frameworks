@@ -4,6 +4,10 @@ public class QueryDetails {
 
   private String brandName;
   private String modelName;
+  private String type;
+  private String fuel;
+  private int minCapacity;
+  private int maxCapacity;
   private int minYear;
   private int maxYear;
   private int minMileage;
@@ -12,9 +16,6 @@ public class QueryDetails {
   private int maxPrice;
   private String currency;
   private String city;
-  private String fuel;
-  private int minCapacity;
-  private int maxCapacity;
 
   public QueryDetails() {
   }
@@ -33,6 +34,38 @@ public class QueryDetails {
 
   public void setModelName(String modelName) {
     this.modelName = modelName;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public String getFuel() {
+    return fuel;
+  }
+
+  public void setFuel(String fuel) {
+    this.fuel = fuel;
+  }
+
+  public int getMinCapacity() {
+    return minCapacity;
+  }
+
+  public void setMinCapacity(int minCapacity) {
+    this.minCapacity = minCapacity;
+  }
+
+  public int getMaxCapacity() {
+    return maxCapacity;
+  }
+
+  public void setMaxCapacity(int maxCapacity) {
+    this.maxCapacity = maxCapacity;
   }
 
   public int getMinYear() {
@@ -97,30 +130,6 @@ public class QueryDetails {
 
   public void setCity(String city) {
     this.city = city;
-  }
-
-  public String getFuel() {
-    return fuel;
-  }
-
-  public void setFuel(String fuel) {
-    this.fuel = fuel;
-  }
-
-  public int getMinCapacity() {
-    return minCapacity;
-  }
-
-  public void setMinCapacity(int minCapacity) {
-    this.minCapacity = minCapacity;
-  }
-
-  public int getMaxCapacity() {
-    return maxCapacity;
-  }
-
-  public void setMaxCapacity(int maxCapacity) {
-    this.maxCapacity = maxCapacity;
   }
 
 }

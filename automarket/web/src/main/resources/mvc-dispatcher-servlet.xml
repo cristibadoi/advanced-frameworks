@@ -9,7 +9,14 @@
   http://www.springframework.org/schema/mvc 
   http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-  <!-- JSP RESOURCES -->
+  <mvc:annotation-driven />
+
+  <!-- WEB RESOURCES MAPPING -->
+
+  <mvc:resources mapping="/webjars/**" location="/webjars/" />
+  <mvc:resources mapping="/resources/**" location="/resources/" />
+
+  <!-- JSP VIEW RESOLVER -->
 
   <bean
     class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -21,8 +28,25 @@
 
   <context:component-scan base-package="com.cristibadoi.automarket.web.controllers" />
 
-  <mvc:annotation-driven />
-  <mvc:resources mapping="/webjars/**" location="/webjars/"  />
-  <mvc:resources mapping="/resources/**" location="/resources/" />
+  <!-- INTERNATIONALIZATION -->
+
+  <bean id="messageSource"
+    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <property name="basename" value="classpath:labels/labels" />
+    <property name="defaultEncoding" value="UTF-8" />
+  </bean>
+
+  <bean id="localeResolver"
+    class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+    <property name="defaultLocale" value="en_US" />
+    <property name="cookieName" value="automarketLocaleCookie" />
+    <property name="cookieMaxAge" value="3600" />
+  </bean>
+
+  <mvc:interceptors>
+    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+      <property name="paramName" value="locale" />
+    </bean>
+  </mvc:interceptors>
 
 </beans>

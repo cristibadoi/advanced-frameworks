@@ -14,22 +14,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cristibadoi.automarket.persistence.models.RoleModel;
 import com.cristibadoi.automarket.persistence.models.UserModel;
-import com.cristibadoi.automarket.persistence.repositories.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
   @Autowired
-  private UserRepository userRepository;
+  private UserService userService;
 
   @Override
-  @Transactional(readOnly = true)
+  @Transactional
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    UserModel user = userRepository.findByUsername(username);
-
-    List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+    UserModel user = userService.findByUsername(username);
+    System.out.println(user.getUsername());
+    System.out.println(user.getPassword());
+    List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
     for (RoleModel role : user.getRoles()) {
       grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+      System.out.println(role.getName());
     }
 
     return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),

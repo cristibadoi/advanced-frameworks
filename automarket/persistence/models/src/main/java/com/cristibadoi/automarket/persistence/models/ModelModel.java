@@ -27,20 +27,10 @@ public class ModelModel {
   @JoinColumn(name = "brand_id", referencedColumnName = "id", nullable = false)
   private BrandModel brand;
 
-  @ManyToOne
-  @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
-  private TypeModel type;
-
   @OneToMany(mappedBy = "model")
   private List<PostModel> posts;
 
   public ModelModel() {
-  }
-
-  public ModelModel(String name, BrandModel brand, TypeModel type) {
-    this.name = name;
-    this.brand = brand;
-    this.type = type;
   }
 
   public long getId() {
@@ -65,14 +55,6 @@ public class ModelModel {
 
   public void setBrand(BrandModel brand) {
     this.brand = brand;
-  }
-
-  public TypeModel getType() {
-    return type;
-  }
-
-  public void setType(TypeModel type) {
-    this.type = type;
   }
 
   public List<PostModel> getPosts() {
@@ -114,8 +96,6 @@ public class ModelModel {
     builder.append(name);
     builder.append(", brand=");
     builder.append(brand);
-    builder.append(", type=");
-    builder.append(type);
     builder.append("]");
     return builder.toString();
   }

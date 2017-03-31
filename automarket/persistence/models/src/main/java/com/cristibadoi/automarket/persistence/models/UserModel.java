@@ -30,7 +30,7 @@ public class UserModel {
   @Column(nullable = false)
   private String password;
 
-  @Column(nullable = false)
+  @Column(nullable = false, columnDefinition = "TINYINT(1)")
   private boolean enabled;
 
   @OneToMany(mappedBy = "user")
