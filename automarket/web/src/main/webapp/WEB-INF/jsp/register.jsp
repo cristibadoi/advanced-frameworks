@@ -55,31 +55,34 @@
 		<h2>
 			<spring:message code="label.insert-register-data" />
 		</h2>
-		<div id="errorPanel"></div>
 		<form name="register-form" action="/register" method="post" onsubmit="return validateForm()">
 			<div class="form-group">
 				<div class="form-group" id="email-form-group">
 					<label for="email"><spring:message code="label.register-email" /></label>
 					<div class="form-inline">
 						<input name="email" class="form-control" type="text" id="email">
+						<span id="email-error"></span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="username-form-group">
 					<label for="username"><spring:message code="label.register-username" /></label>
 					<div class="form-inline">
 						<input name="username" class="form-control" type="text" id="username">
+						<span id="username-error"></span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="password-form-group">
 					<label for="password"><spring:message code="label.register-password" /></label>
 					<div class="form-inline">
 						<input name="password" class="form-control" type="password" id="password">
+						<span id="password-error"></span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="confirm-form-group">
 					<label for="confirm-password"><spring:message code="label.confirm-password" /></label>
 					<div class="form-inline">
 						<input name="confirm-password" class="form-control" type="password" id="confirm-password">
+						<span id="confirm-error"></span>
 					</div>
 				</div>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
