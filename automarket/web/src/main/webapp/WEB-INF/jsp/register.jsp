@@ -9,9 +9,10 @@
 <head>
 <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
-<script src="resources/js/login.js"></script>
-<title><spring:message code="label.login-title" /></title>
-<link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+<script type="text/javascript" src="resources/js/register.js"></script>
+<title><spring:message code="label.register-title" /></title>
+<link rel="stylesheet"
+	href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
 </head>
 
 <body>
@@ -27,7 +28,8 @@
 					<li><a href="<c:url value="/register" />"><spring:message code="label.menu-register-button" /></a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<li><a href="<c:url value="/messages" />"><spring:message code="label.menu-messages-button" /></a></li>
+					<li><a href="<c:url value="/messages" />"><spring:message
+								code="label.menu-messages-button" /></a></li>
 				</sec:authorize>
 				<li><a href="<c:url value="/publish" />"><spring:message code="label.menu-publish-button" /></a></li>
 				<sec:authorize access="isAuthenticated()">	
@@ -51,26 +53,39 @@
 
 	<div class="container">
 		<h2>
-			<spring:message code="label.insert-login-data" />
+			<spring:message code="label.insert-register-data" />
 		</h2>
-		<form name="login-form" action="/login" method="post">
+		<div id="errorPanel"></div>
+		<form name="register-form" action="/register" method="post" onsubmit="return validateForm()">
 			<div class="form-group">
+				<div class="form-group" id="email-form-group">
+					<label for="email"><spring:message code="label.register-email" /></label>
+					<div class="form-inline">
+						<input name="email" class="form-control" type="text" id="email">
+					</div>
+				</div>
 				<div class="form-group">
-					<label for="username"><spring:message code="label.username-text" /></label>
+					<label for="username"><spring:message code="label.register-username" /></label>
 					<div class="form-inline">
 						<input name="username" class="form-control" type="text" id="username">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="password"><spring:message code="label.password-text" /></label>
+					<label for="password"><spring:message code="label.register-password" /></label>
 					<div class="form-inline">
 						<input name="password" class="form-control" type="password" id="password">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="confirm-password"><spring:message code="label.confirm-password" /></label>
+					<div class="form-inline">
+						<input name="confirm-password" class="form-control" type="password" id="confirm-password">
 					</div>
 				</div>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary btn-lg"><spring:message code="label.submit-login" /></button>
+				<button type="submit" class="btn btn-primary btn-lg"><spring:message code="label.submit-register" /></button>
 			</div>
 		</form>
 	</div>

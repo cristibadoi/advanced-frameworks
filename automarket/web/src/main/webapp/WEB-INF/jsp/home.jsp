@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 
@@ -20,12 +21,33 @@
 				<a class="navbar-brand" href="<c:url value="/" />"><spring:message code="label.menu-home-button" /></a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="<c:url value="/login" />"><spring:message code="label.menu-login-button" /></a></li>
-				<li><a href="<c:url value="/publish" />"><spring:message code="label.menu-publish-button" /></a></li>
+				<sec:authorize access="isAnonymous()">
+					<li><a href="<c:url value="/login" />"><spring:message code="label.menu-login-button" /></a></li>
+					<li><a href="<c:url value="/register" />"><spring:message code="label.menu-register-button" /></a></li>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<li><a href="<c:url value="/messages" />"><spring:message code="label.menu-messages-button" /></a></li>
+				</sec:authorize>
+					<li><a href="<c:url value="/publish" />"><spring:message code="label.menu-publish-button" /></a></li>
+				<sec:authorize access="isAuthenticated()">	
+    				<li>
+    					<a href="#" onclick="document.getElementById('logout-form').submit()"><spring:message code="label.menu-logout-button" /></a>
+    				</li>
+				</sec:authorize>
 			</ul>
+			<ul class="nav navbar-nav navbar-right">
+      			<li><a href="?locale=ro_RO">RO</a></li>
+      			<li><a href="?locale=en_US">EN</a></li>
+    		</ul>
 		</div>
 	</nav>
-
+	
+	<sec:authorize access="isAuthenticated()">
+		<form id="logout-form" action="/logout" method="post">
+    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+   		</form>	
+	</sec:authorize>    				
+	
 	<div class="container">
 		<h2>
 			<spring:message code="label.search-details" />
@@ -74,7 +96,7 @@
 			<div class="form-group">
 				<label><spring:message code="label.select-capacity" /></label>
 				<div class="form-inline"> 
-					<input name="minCapacity" type="number" class="form-control"	id="minCapacity" placeholder="<spring:message code="label.min-capacity" />"> 
+					<input name="minCapacity" type="number" class="form-control" id="minCapacity" placeholder="<spring:message code="label.min-capacity" />"> 
 					<input name="maxCapacity" type="number" class="form-control" id="maxCapacity" placeholder="<spring:message code="label.max-capacity" />">
 				</div>
 			</div>
@@ -119,7 +141,7 @@
 					<option>4</option>
 				</select>
 			</div>
-			<div class="form-group"> <!-- Submit button !-->
+			<div class="form-group">
 				<button type="submit" class="btn btn-primary btn-lg btn-block"><spring:message code="label.submit-search" /></button>
 			</div>	
 		</form>

@@ -3,6 +3,7 @@ package com.cristibadoi.automarket.authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cristibadoi.automarket.persistence.models.UserModel;
 import com.cristibadoi.automarket.persistence.repositories.RoleRepository;
@@ -14,15 +15,19 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   private UserRepository userRepository;
+  
   @Autowired
   private RoleRepository roleRepository;
+  
   @Autowired
   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+  @Transactional
   @Override
   public void save(UserModel user) {
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-    user.setRoles(Lists.newArrayList(roleRepository.findAll()));
+    user.setRoles(Lists.newArrayList(roleRepository.findByName("ROLE_USER")));
+    System.out.println(user.getRoles());
     userRepository.save(user);
   }
 
