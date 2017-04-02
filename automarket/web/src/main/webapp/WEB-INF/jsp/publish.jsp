@@ -7,11 +7,10 @@
 <html>
 
 <head>
-<script src="webjars/jquery/1.11.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
-<title><spring:message code="label.home-title" /></title>
+<script src=<c:url value="/webjars/jquery/1.11.1/jquery.min.js"/>></script>
+<script src=<c:url value="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"/>></script>
+<link rel="stylesheet" href=<c:url value="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>/>
+<title><spring:message code="label.publish-title" /></title>
 </head>
 
 <body>
@@ -49,7 +48,44 @@
 	</sec:authorize>    				
 	
 	<div class="container">
-		
+		<h2>
+			<spring:message code="label.insert-register-data" />
+		</h2>
+		<form name="publish-form" action="/publish" method="post" onsubmit="return validateForm()">
+			<div class="form-group">
+				<div class="form-group">
+					<label for="email"><spring:message code="label.register-email" /></label>
+					<div class="form-inline">
+						<input name="brand" id="brand" class="form-control" type="text">
+					</div>
+				</div>
+				<div class="form-group" id="username-form-group">
+					<label for="username"><spring:message code="label.register-username" /></label>
+					<div class="form-inline">
+						<input name="username" class="form-control" type="text" id="username">
+						<span id="username-error"></span>
+					</div>
+				</div>
+				<div class="form-group" id="password-form-group">
+					<label for="password"><spring:message code="label.register-password" /></label>
+					<div class="form-inline">
+						<input name="password" class="form-control" type="password" id="password">
+						<span id="password-error"></span>
+					</div>
+				</div>
+				<div class="form-group" id="confirm-form-group">
+					<label for="confirm-password"><spring:message code="label.confirm-password" /></label>
+					<div class="form-inline">
+						<input name="confirm-password" class="form-control" type="password" id="confirm-password">
+						<span id="confirm-error"></span>
+					</div>
+				</div>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-lg"><spring:message code="label.submit-register" /></button>
+			</div>
+		</form>
 	</div>
 </body>
 

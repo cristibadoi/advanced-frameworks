@@ -15,7 +15,6 @@ public class PostData {
   private String modelName;
   private String fuelName;
   private String cityName;
-  private String currencyCode;
 
   public PostData() {
   }
@@ -122,14 +121,6 @@ public class PostData {
 
   public void setCityName(String cityName) {
     this.cityName = cityName;
-  }
-
-  public String getCurrencyCode() {
-    return currencyCode;
-  }
-
-  public void setCurrencyCode(String currencyCode) {
-    this.currencyCode = currencyCode;
   }
   
 }

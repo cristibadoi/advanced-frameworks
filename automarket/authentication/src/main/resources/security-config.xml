@@ -15,6 +15,7 @@
     <intercept-url pattern="/login" access="permitAll" />
     <intercept-url pattern="/register" access="permitAll" />
     <intercept-url pattern="/search" access="permitAll" />
+    <intercept-url pattern="/post" access="permitAll" />
     <intercept-url pattern="/messages" access="isAuthenticated()" />
     <intercept-url pattern="/publish" access="isAuthenticated()" />
 
@@ -28,9 +29,15 @@
     class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
   <authentication-manager alias="authenticationManager">
+    <authentication-provider>
+      <user-service>
+        <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
+      </user-service>
+    </authentication-provider>
     <authentication-provider user-service-ref="userDetailsServiceImpl">
       <password-encoder ref="passwordEncoder" />
     </authentication-provider>
+
   </authentication-manager>
 
   <!-- SCANNED PACKAGES -->

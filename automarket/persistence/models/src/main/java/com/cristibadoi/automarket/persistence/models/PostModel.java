@@ -69,10 +69,6 @@ public class PostModel {
   private CityModel city;
 
   @ManyToOne
-  @JoinColumn(name = "currency_id", referencedColumnName = "id", nullable = false)
-  private CurrencyModel currency;
-
-  @ManyToOne
   @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
   private StatusModel status;
 
@@ -207,14 +203,6 @@ public class PostModel {
     this.city = city;
   }
 
-  public CurrencyModel getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(CurrencyModel currency) {
-    this.currency = currency;
-  }
-
   public StatusModel getStatus() {
     return status;
   }
@@ -280,8 +268,6 @@ public class PostModel {
     builder.append(fuel);
     builder.append(", city=");
     builder.append(city);
-    builder.append(", currency=");
-    builder.append(currency);
     builder.append(", status=");
     builder.append(status);
     builder.append("]");

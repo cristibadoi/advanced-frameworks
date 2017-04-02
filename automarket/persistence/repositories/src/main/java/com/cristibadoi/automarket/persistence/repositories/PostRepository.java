@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.cristibadoi.automarket.persistence.models.BrandModel;
 import com.cristibadoi.automarket.persistence.models.CityModel;
-import com.cristibadoi.automarket.persistence.models.CurrencyModel;
 import com.cristibadoi.automarket.persistence.models.FuelModel;
 import com.cristibadoi.automarket.persistence.models.ModelModel;
 import com.cristibadoi.automarket.persistence.models.PostModel;
@@ -15,6 +14,8 @@ import com.cristibadoi.automarket.persistence.models.StatusModel;
 import com.cristibadoi.automarket.persistence.models.UserModel;
 
 public interface PostRepository extends CrudRepository<PostModel, Long>, QueryDslPredicateExecutor<PostModel> {
+
+  PostModel findById(long id);
 
   List<PostModel> findByUser(UserModel user);
 
@@ -25,8 +26,6 @@ public interface PostRepository extends CrudRepository<PostModel, Long>, QueryDs
   List<PostModel> findByCity(CityModel city);
 
   List<PostModel> findByStatus(StatusModel status);
-
-  List<PostModel> findByCurrency(CurrencyModel currency);
 
   List<PostModel> findByFuel(FuelModel fuel);
 
