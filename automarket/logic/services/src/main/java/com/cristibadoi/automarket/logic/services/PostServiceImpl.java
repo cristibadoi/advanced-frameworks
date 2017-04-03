@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cristibadoi.automarket.logic.constants.ServiceLayerConstants;
 import com.cristibadoi.automarket.logic.converters.EntityConverter;
 import com.cristibadoi.automarket.logic.data.PostData;
 import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
@@ -36,7 +37,7 @@ public class PostServiceImpl implements PostService {
         .newArrayList(postRepository.findAll(postPredicates.createPredicate(queryDetails)));
     
     if (results.isEmpty()) {
-      throw new NoResultsFoundException("No matching results found!");
+      throw new NoResultsFoundException(ServiceLayerConstants.NO_MATCHING_RESULTS_MESSAGE);
     }
 
     return postConverter.convertModelToDataList(results);
@@ -49,11 +50,17 @@ public class PostServiceImpl implements PostService {
 
     PostModel result = postRepository.findById(id);
     if (result == null) {
-      throw new PostNotFoundException("No post found with id: " + id);
+      throw new PostNotFoundException(ServiceLayerConstants.POST_NOT_FOUND_MESSAGE);
     }
 
     return postConverter.convertModelToData(result);
 
+  }
+
+  @Override
+  @Transactional
+  public void save(PostModel post) {
+    postRepository.save(post);
   }
 
 }

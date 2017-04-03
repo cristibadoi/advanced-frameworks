@@ -57,7 +57,7 @@
 	</sec:authorize>
 
 	<div class="container">
-		<div class="alert alert-danger" role="alert">
+		<div class="alert alert-success" role="alert">
 			<h3 class="text-center"><strong>SUCCESS!</strong>&nbsp;${message}</h3>
 		</div>
 	</div>

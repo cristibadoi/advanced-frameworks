@@ -33,6 +33,10 @@ public class ModelModel {
   public ModelModel() {
   }
 
+  public ModelModel(String name) {
+    this.name = name;
+  }
+
   public long getId() {
     return id;
   }

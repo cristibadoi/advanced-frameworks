@@ -29,18 +29,11 @@ public class SearchController {
       throws NoResultsFoundException {
 
     QueryDetails queryDetails = new QueryDetails();
-    if (brand != null) {
-      queryDetails.setBrandName(brand);
-    }
-    if (model != null) {
-      queryDetails.setModelName(model);
-    }
-    if (type != null) {
-      queryDetails.setType(type);
-    }
-    if (fuel != null) {
-      queryDetails.setFuel(fuel);
-    }
+    queryDetails.setBrandName(brand);
+    queryDetails.setModelName(model);
+    queryDetails.setType(type);
+    queryDetails.setFuel(fuel);
+    queryDetails.setCity(city);
     if (minCapacity != null) {
       queryDetails.setMinCapacity(minCapacity);
     }
@@ -67,9 +60,6 @@ public class SearchController {
     }
     if (currency != null) {
       queryDetails.setCurrency(currency);
-    }
-    if (city != null) {
-      queryDetails.setCity(city);
     }
 
     return new ModelAndView("search-results", "results", service.getMatchingPosts(queryDetails));

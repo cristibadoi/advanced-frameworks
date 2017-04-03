@@ -15,6 +15,7 @@ public class PostData {
   private String modelName;
   private String fuelName;
   private String cityName;
+  private String type;
 
   public PostData() {
   }
@@ -113,7 +114,7 @@ public class PostData {
 
   public void setFuelName(String fuelName) {
     this.fuelName = fuelName;
-  }
+  } 
 
   public String getCityName() {
     return cityName;
@@ -121,6 +122,14 @@ public class PostData {
 
   public void setCityName(String cityName) {
     this.cityName = cityName;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
   
 }

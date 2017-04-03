@@ -7,9 +7,21 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cristibadoi.automarket.exceptions.ApplicationException;
 import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
 import com.cristibadoi.automarket.logic.exceptions.PostNotFoundException;
+import com.cristibadoi.automarket.logic.exceptions.UploadFailureException;
+import com.cristibadoi.automarket.web.constants.WebLayerConstants;
 
 @ControllerAdvice
 public class AppExceptionHandler {
+
+  @ExceptionHandler(UploadFailureException.class)
+  public ModelAndView handleUploadFailureException(UploadFailureException ex) {
+
+    ModelAndView model = new ModelAndView("error");
+    model.addObject("message", ex.getMessage());
+
+    return model;
+
+  }
 
   @ExceptionHandler(NoResultsFoundException.class)
   public ModelAndView handleNoResultsFoundException(NoResultsFoundException ex) {
@@ -35,7 +47,7 @@ public class AppExceptionHandler {
   public ModelAndView handleAllApplicationExceptions(Exception ex) {
 
     ModelAndView model = new ModelAndView("error");
-    model.addObject("message", "We're sorry, an error has occured!");
+    model.addObject("message", WebLayerConstants.GENERIC_ERROR_MESSAGE);
 
     return model;
 

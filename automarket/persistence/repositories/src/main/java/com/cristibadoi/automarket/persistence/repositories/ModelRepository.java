@@ -9,7 +9,7 @@ import com.cristibadoi.automarket.persistence.models.ModelModel;
 
 public interface ModelRepository extends CrudRepository<ModelModel, Long> {
 
-  List<ModelModel> findByName(String name);
+  ModelModel findByName(String name);
 
   List<ModelModel> findByBrand(BrandModel brand);
 

@@ -34,7 +34,7 @@ public class RegisterController {
 
     userService.save(newUser);
 
-    return "redirect:/";
+    return "redirect:/login";
   }
 
 }

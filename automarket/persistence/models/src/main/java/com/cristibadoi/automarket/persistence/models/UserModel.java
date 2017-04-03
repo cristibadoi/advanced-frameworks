@@ -49,9 +49,14 @@ public class UserModel {
   public UserModel() {
   }
 
-  public UserModel(String email, String password) {
-    this.email = email;
+  public UserModel(String username) {
+    this.username = username;
+  }
+  
+  public UserModel(String username, String password, String email) {
+    this.username = username;
     this.password = password;
+    this.email = email;
   }
 
   public long getId() {

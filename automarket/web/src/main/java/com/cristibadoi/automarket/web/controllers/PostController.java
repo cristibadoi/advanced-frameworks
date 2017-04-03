@@ -22,7 +22,7 @@ public class PostController {
 
     ModelAndView model = new ModelAndView("post");
     model.addObject("post", postService.getPostById(id));
-    
+
     return model;
 
   }
