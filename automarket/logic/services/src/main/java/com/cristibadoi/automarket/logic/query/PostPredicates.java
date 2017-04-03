@@ -44,9 +44,6 @@ public class PostPredicates {
     if (queryDetails.getType() != null) {
       builder.and(post.type.name.equalsIgnoreCase(queryDetails.getType()));
     }
-    if (queryDetails.getCurrency() != null) {
-      builder.and(post.currency.code.equalsIgnoreCase(queryDetails.getCurrency()));
-    }
     if (queryDetails.getCity() != null) {
       builder.and(post.city.name.equalsIgnoreCase(queryDetails.getCity()));
     }

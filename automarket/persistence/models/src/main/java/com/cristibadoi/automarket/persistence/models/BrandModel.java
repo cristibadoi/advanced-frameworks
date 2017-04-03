@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,10 +21,6 @@ public class BrandModel {
   @Column(unique = true, nullable = false)
   private String name;
 
-  @ManyToOne
-  @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
-  private CountryModel country;
-
   @OneToMany(mappedBy = "brand")
   private List<ModelModel> models;
 
@@ -36,9 +30,8 @@ public class BrandModel {
   public BrandModel() {
   }
 
-  public BrandModel(String name, CountryModel country) {
+  public BrandModel(String name) {
     this.name = name;
-    this.country = country;
   }
 
   public long getId() {
@@ -55,14 +48,6 @@ public class BrandModel {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public CountryModel getCountry() {
-    return country;
-  }
-
-  public void setCountry(CountryModel country) {
-    this.country = country;
   }
 
   public List<ModelModel> getModels() {
@@ -110,8 +95,6 @@ public class BrandModel {
     builder.append(id);
     builder.append(", name=");
     builder.append(name);
-    builder.append(", country=");
-    builder.append(country);
     builder.append("]");
     return builder.toString();
   }

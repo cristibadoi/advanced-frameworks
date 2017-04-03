@@ -7,26 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "city", uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "country_id" }) })
+@Table(name = "city")
 public class CityModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @Column(nullable = false)
+  @Column(unique = true, nullable = false)
   private String name;
-
-  @ManyToOne
-  @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
-  private CountryModel country;
 
   @OneToMany(mappedBy = "city")
   private List<PostModel> posts;
@@ -34,9 +27,8 @@ public class CityModel {
   public CityModel() {
   }
 
-  public CityModel(String name, CountryModel country) {
+  public CityModel(String name) {
     this.name = name;
-    this.country = country;
   }
 
   public long getId() {
@@ -53,14 +45,6 @@ public class CityModel {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public CountryModel getCountry() {
-    return country;
-  }
-
-  public void setCountry(CountryModel country) {
-    this.country = country;
   }
 
   public List<PostModel> getPosts() {
@@ -100,10 +84,6 @@ public class CityModel {
     builder.append(id);
     builder.append(", name=");
     builder.append(name);
-    builder.append(", country=");
-    builder.append(country);
-    builder.append(", posts=");
-    builder.append(posts);
     builder.append("]");
     return builder.toString();
   }

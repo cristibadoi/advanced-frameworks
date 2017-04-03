@@ -15,7 +15,7 @@ public class PostData {
   private String modelName;
   private String fuelName;
   private String cityName;
-  private String currencyCode;
+  private String type;
 
   public PostData() {
   }
@@ -114,7 +114,7 @@ public class PostData {
 
   public void setFuelName(String fuelName) {
     this.fuelName = fuelName;
-  }
+  } 
 
   public String getCityName() {
     return cityName;
@@ -124,12 +124,12 @@ public class PostData {
     this.cityName = cityName;
   }
 
-  public String getCurrencyCode() {
-    return currencyCode;
+  public String getType() {
+    return type;
   }
 
-  public void setCurrencyCode(String currencyCode) {
-    this.currencyCode = currencyCode;
+  public void setType(String type) {
+    this.type = type;
   }
   
 }

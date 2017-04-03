@@ -27,7 +27,7 @@ public class PostConverter implements EntityConverter<PostModel, PostData> {
     result.setModelName(model.getModel().getName());
     result.setFuelName(model.getFuel().getName());
     result.setCityName(model.getCity().getName());
-    result.setCurrencyCode(model.getCurrency().getCode());
+    result.setType(model.getType().getName());
     return result;
   }
 

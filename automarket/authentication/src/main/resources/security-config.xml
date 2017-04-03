@@ -12,9 +12,10 @@
 
   <http auto-config="true" use-expressions="true">
     <intercept-url pattern="/" access="permitAll" />
-    <intercept-url pattern="/login" access="permitAll" />
+    <intercept-url pattern="/login" access="isAnonymous()" />
     <intercept-url pattern="/register" access="permitAll" />
     <intercept-url pattern="/search" access="permitAll" />
+    <intercept-url pattern="/post" access="permitAll" />
     <intercept-url pattern="/messages" access="isAuthenticated()" />
     <intercept-url pattern="/publish" access="isAuthenticated()" />
 
@@ -31,6 +32,7 @@
     <authentication-provider user-service-ref="userDetailsServiceImpl">
       <password-encoder ref="passwordEncoder" />
     </authentication-provider>
+
   </authentication-manager>
 
   <!-- SCANNED PACKAGES -->

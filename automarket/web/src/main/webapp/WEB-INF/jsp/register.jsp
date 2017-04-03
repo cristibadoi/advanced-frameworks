@@ -7,12 +7,11 @@
 <html>
 
 <head>
-<script src="webjars/jquery/1.11.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="resources/js/register.js"></script>
+<script src=<c:url value="/webjars/jquery/1.11.1/jquery.min.js"/>></script>
+<script src=<c:url value="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"/>></script>
+<link rel="stylesheet" href=<c:url value="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>/>
+<script type="text/javascript" src=<c:url value="resources/js/register.js"/>></script>
 <title><spring:message code="label.register-title" /></title>
-<link rel="stylesheet"
-	href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
 </head>
 
 <body>
@@ -28,8 +27,7 @@
 					<li><a href="<c:url value="/register" />"><spring:message code="label.menu-register-button" /></a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<li><a href="<c:url value="/messages" />"><spring:message
-								code="label.menu-messages-button" /></a></li>
+					<li><a href="<c:url value="/messages" />"><spring:message code="label.menu-messages-button" /></a></li>
 				</sec:authorize>
 				<li><a href="<c:url value="/publish" />"><spring:message code="label.menu-publish-button" /></a></li>
 				<sec:authorize access="isAuthenticated()">	
@@ -55,31 +53,34 @@
 		<h2>
 			<spring:message code="label.insert-register-data" />
 		</h2>
-		<div id="errorPanel"></div>
 		<form name="register-form" action="/register" method="post" onsubmit="return validateForm()">
 			<div class="form-group">
 				<div class="form-group" id="email-form-group">
 					<label for="email"><spring:message code="label.register-email" /></label>
 					<div class="form-inline">
 						<input name="email" class="form-control" type="text" id="email">
+						<span id="email-error"></span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="username-form-group">
 					<label for="username"><spring:message code="label.register-username" /></label>
 					<div class="form-inline">
 						<input name="username" class="form-control" type="text" id="username">
+						<span id="username-error"></span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="password-form-group">
 					<label for="password"><spring:message code="label.register-password" /></label>
 					<div class="form-inline">
 						<input name="password" class="form-control" type="password" id="password">
+						<span id="password-error"></span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="confirm-form-group">
 					<label for="confirm-password"><spring:message code="label.confirm-password" /></label>
 					<div class="form-inline">
 						<input name="confirm-password" class="form-control" type="password" id="confirm-password">
+						<span id="confirm-error"></span>
 					</div>
 				</div>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

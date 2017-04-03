@@ -15,25 +15,30 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   private UserRepository userRepository;
-  
+
   @Autowired
   private RoleRepository roleRepository;
-  
+
   @Autowired
   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-  @Transactional
   @Override
+  @Transactional
   public void save(UserModel user) {
+
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
     user.setRoles(Lists.newArrayList(roleRepository.findByName("ROLE_USER")));
-    System.out.println(user.getRoles());
+    
     userRepository.save(user);
+
   }
 
   @Override
+  @Transactional(readOnly = true)
   public UserModel findByUsername(String username) {
+
     return userRepository.findByUsername(username);
+
   }
 
 }

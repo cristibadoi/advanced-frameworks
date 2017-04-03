@@ -7,10 +7,28 @@
 <html>
 
 <head>
-<script src="webjars/jquery/1.11.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+<script src=<c:url value="/webjars/jquery/1.11.1/jquery.min.js"/>></script>
+<script src=<c:url value="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"/>></script>
+<link rel="stylesheet" href=<c:url value="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>/>
+<script src=<c:url value="/webjars/bootstrap-select/1.12.0/js/bootstrap-select.min.js"/>></script>
+<link rel="stylesheet" href=<c:url value="/webjars/bootstrap-select/1.12.0/css/bootstrap-select.min.css"/>/>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#brand").change(function() {
+    
+    var val = $(this).val();
+    var options = "<option value='' selected>" + "<spring:message code="label.default-selection" />" + "</option>";
+    <c:forEach items="${models}" var="item">
+    	if ("${item.brand.name}" == val) {
+    	  var modelName = "${item.name}";
+    	  options += "<option>" + modelName + "</option>";
+    	} 	
+    </c:forEach>
+    $("#model").html(options);
+    $("#model").selectpicker("refresh");
+  });
+});
+</script>
 <title><spring:message code="label.home-title" /></title>
 </head>
 
@@ -55,42 +73,38 @@
 		<form name="search-form" action="/search" method="get">
 			<div class="form-group">
 				<label for="brand"><spring:message code="label.select-brand" /></label>
-				<select data-live-search="true" class="form-control" id="brand" name="brand">
+				<select data-live-search="true" class="selectpicker form-control" id="brand" name="brand">
 					<option value='' selected><spring:message code="label.default-selection" /></option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
+					<c:forEach items="${brands}" var="element">
+						<option><c:out value="${element.name}"/></option>
+					</c:forEach>
 				</select>
 			</div>
 			<div class="form-group">
 				<label for="model"><spring:message code="label.select-model" /></label>
-				<select data-live-search="true" class="form-control" id="model" name="model">
+				<select data-live-search="true" class="selectpicker form-control" id="model" name="model"
+					title="<spring:message code="label.default-selection" />">
 					<option value='' selected><spring:message code="label.default-selection" /></option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
 				</select>
 			</div>
 			<div class="form-group">
 				<label for="type"><spring:message code="label.select-type" /></label>
-				<select data-live-search="true" class="form-control" id="type" name="type">
+				<select data-live-search="true" class="selectpicker form-control" id="type" name="type"
+					title="<spring:message code="label.default-selection" />" required>
 					<option value='' selected><spring:message code="label.default-selection" /></option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
+					<c:forEach items="${types}" var="element">
+						<option><c:out value="${element.name}"/></option>
+					</c:forEach>
 				</select>
 			</div>
 			<div class="form-group">
 				<label for="fuel"><spring:message code="label.select-fuel" /></label>
-				<select data-live-search="true" class="form-control" id="fuel" name="fuel">
+				<select data-live-search="true" class="selectpicker form-control" id="fuel" name="fuel"
+					title="<spring:message code="label.default-selection" />" required>
 					<option value='' selected><spring:message code="label.default-selection" /></option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
+					<c:forEach items="${fuels}" var="element">
+						<option><c:out value="${element.name}"/></option>
+					</c:forEach>
 				</select>
 			</div>
 			<div class="form-group">
@@ -122,23 +136,13 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="currency"><spring:message code="label.select-currency" /></label> 
-				<select name="currency" data-live-search="true"	class="form-control" id="currency">
-					<option value='' selected><spring:message code="label.default-selection" /></option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-				</select>
-			</div>
-			<div class="form-group">
 				<label for="city"><spring:message code="label.select-city" /></label>
-				<select name="city" data-live-search="true" class="form-control" id="city">
+				<select data-live-search="true" class="selectpicker form-control" id="city" name="city"
+					title="<spring:message code="label.default-selection" />" required>
 					<option value='' selected><spring:message code="label.default-selection" /></option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
+					<c:forEach items="${cities}" var="element">
+						<option><c:out value="${element.name}"/></option>
+					</c:forEach>
 				</select>
 			</div>
 			<div class="form-group">
