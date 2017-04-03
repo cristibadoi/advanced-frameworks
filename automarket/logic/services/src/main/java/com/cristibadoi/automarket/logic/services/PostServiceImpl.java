@@ -32,7 +32,7 @@ public class PostServiceImpl implements PostService {
   @Override
   @Transactional(readOnly = true)
   public List<PostData> getMatchingPosts(QueryDetails queryDetails) throws NoResultsFoundException {
-
+    
     List<PostModel> results = Lists
         .newArrayList(postRepository.findAll(postPredicates.createPredicate(queryDetails)));
     

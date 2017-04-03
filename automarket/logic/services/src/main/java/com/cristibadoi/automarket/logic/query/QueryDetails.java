@@ -14,7 +14,6 @@ public class QueryDetails {
   private int maxMileage;
   private int minPrice;
   private int maxPrice;
-  private String currency;
   private String city;
 
   public QueryDetails() {
@@ -116,20 +115,45 @@ public class QueryDetails {
     this.maxPrice = maxPrice;
   }
 
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
   public String getCity() {
     return city;
   }
 
   public void setCity(String city) {
     this.city = city;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("QueryDetails [brandName=");
+    builder.append(brandName);
+    builder.append(", modelName=");
+    builder.append(modelName);
+    builder.append(", type=");
+    builder.append(type);
+    builder.append(", fuel=");
+    builder.append(fuel);
+    builder.append(", minCapacity=");
+    builder.append(minCapacity);
+    builder.append(", maxCapacity=");
+    builder.append(maxCapacity);
+    builder.append(", minYear=");
+    builder.append(minYear);
+    builder.append(", maxYear=");
+    builder.append(maxYear);
+    builder.append(", minMileage=");
+    builder.append(minMileage);
+    builder.append(", maxMileage=");
+    builder.append(maxMileage);
+    builder.append(", minPrice=");
+    builder.append(minPrice);
+    builder.append(", maxPrice=");
+    builder.append(maxPrice);
+    builder.append(", city=");
+    builder.append(city);
+    builder.append("]");
+    return builder.toString();
   }
 
 }
