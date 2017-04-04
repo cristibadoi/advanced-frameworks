@@ -29,19 +29,19 @@ public class SearchController {
       throws NoResultsFoundException {
 
     QueryDetails queryDetails = new QueryDetails();
-    if (brand != null) {
+    if (brand != null && !brand.equals("")) {
       queryDetails.setBrandName(brand);
     }
-    if (model != null) {
+    if (model != null && !model.equals("")) {
       queryDetails.setModelName(model);
     }
-    if (type != null) {
+    if (type != null && !type.equals("")) {
       queryDetails.setType(type);
     }
-    if (fuel != null) {
+    if (fuel != null && !fuel.equals("")) {
       queryDetails.setFuel(fuel);
     }
-    if (city != null) {
+    if (city != null && !city.equals("")) {
       queryDetails.setCity(city);
     }
     if (minCapacity != null) {
