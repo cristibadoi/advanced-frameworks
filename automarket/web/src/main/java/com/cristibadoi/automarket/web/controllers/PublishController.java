@@ -60,13 +60,7 @@ public class PublishController {
 
     User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     long unixTime = new Date().getTime() / 1000;
-    String rootPath = System.getProperty(ServiceLayerConstants.CATALINA_HOME);
-    String imagesParentFolder = ServiceLayerConstants.LOCAL_IMAGES_PARENT_FOLDER;
-    File folder = new File(
-        rootPath + File.separator + imagesParentFolder + File.separator + currentUser.getUsername() + unixTime);
 
-    imageUploadService.uploadFiles(folder, images);
-    
     PostModel post = new PostModel();
     post.setUser(modelExtractor.findUserByUsername(currentUser.getUsername()));
     post.setBrand(modelExtractor.findBrandByName(brand));
@@ -82,9 +76,14 @@ public class PublishController {
     post.setPrice(price);
     post.setPhoneNumber(phone);
     post.setEmail(email);
-    post.setImages(folder.getAbsolutePath());
     post.setPublicationDate((int) unixTime);
-    
+    post.setImages(new String());
+    post = postService.save(post);
+
+    File folder = new File(ServiceLayerConstants.IMAGES_PARENT_FOLDER + File.separator + post.getId());
+    imageUploadService.uploadFiles(folder, images);
+
+    post.setImages(folder.getAbsolutePath());
     postService.save(post);
 
     ModelAndView result = new ModelAndView("success");

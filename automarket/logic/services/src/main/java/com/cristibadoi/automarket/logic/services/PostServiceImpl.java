@@ -32,10 +32,9 @@ public class PostServiceImpl implements PostService {
   @Override
   @Transactional(readOnly = true)
   public List<PostData> getMatchingPosts(QueryDetails queryDetails) throws NoResultsFoundException {
-    
-    List<PostModel> results = Lists
-        .newArrayList(postRepository.findAll(postPredicates.createPredicate(queryDetails)));
-    
+
+    List<PostModel> results = Lists.newArrayList(postRepository.findAll(postPredicates.createPredicate(queryDetails)));
+
     if (results.isEmpty()) {
       throw new NoResultsFoundException(ServiceLayerConstants.NO_MATCHING_RESULTS_MESSAGE);
     }
@@ -59,8 +58,8 @@ public class PostServiceImpl implements PostService {
 
   @Override
   @Transactional
-  public void save(PostModel post) {
-    postRepository.save(post);
+  public PostModel save(PostModel post) {
+    return postRepository.save(post);
   }
 
 }

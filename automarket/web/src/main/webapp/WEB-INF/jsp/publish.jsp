@@ -108,7 +108,7 @@ $(document).ready(function(){
 			</div>
 			<div class="form-group">
 				<label><spring:message code="label.publish-year" /></label>
-				<select data-live-search="true" class="selectpicker form-control" id="year" name="year"
+				<select data-live-search="true" class="selectpicker form-control" id="year" name="year" data-size="10"
 					title="<spring:message code="label.publish-choose" />" required>
 					<c:forEach begin="1970" end="2017" varStatus="loop">
 						<option>${loop.index}</option>
@@ -153,7 +153,7 @@ $(document).ready(function(){
 			<div class="form-group">
   				<label for="phone"><spring:message code="label.publish-phone-number" /></label>
   				<div class="form-inline">
-  					<input type="text" class="form-control bfh-phone" data-format="+40ddddddddd" name="phone" id="phone">
+  					<input type="text" class="form-control bfh-phone" data-format="+40ddddddddd" name="phone" id="phone" required>
   				</div>
 			</div>
 			<div class="form-group">

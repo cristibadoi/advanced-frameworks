@@ -13,6 +13,7 @@ public interface PostService {
   PostData getPostById(long id) throws PostNotFoundException;
 
   List<PostData> getMatchingPosts(QueryDetails queryDetails) throws NoResultsFoundException;
-  
-  void save(PostModel post);
+
+  PostModel save(PostModel post);
+
 }

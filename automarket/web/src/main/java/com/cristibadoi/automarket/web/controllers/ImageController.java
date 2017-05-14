@@ -1,6 +1,8 @@
 package com.cristibadoi.automarket.web.controllers;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -24,15 +26,15 @@ public class ImageController {
   ServletContext servletContext;
 
   @ResponseBody
-  @GetMapping(value = "/{folderPath}/{imageId}")
-  public byte[] getImage(@PathVariable String folderPath, @PathVariable String imageId) {
-    String absoluteImagePath = System.getProperty(ServiceLayerConstants.CATALINA_HOME) + File.separator
-        + ServiceLayerConstants.LOCAL_IMAGES_PARENT_FOLDER + File.separator + folderPath + File.separator + imageId;
-    InputStream in = servletContext.getResourceAsStream(absoluteImagePath);
-    System.out.println(absoluteImagePath);
+  @GetMapping(value = "/{postId}/{imageName:.+}")
+  public byte[] getImage(@PathVariable String postId, @PathVariable String imageName) {
+    String absoluteImagePath = ServiceLayerConstants.IMAGES_PARENT_FOLDER + File.separator + postId + File.separator
+        + imageName;
     byte[] results = null;
     try {
+      InputStream in = new FileInputStream(absoluteImagePath);
       results = IOUtils.toByteArray(in);
+    } catch (FileNotFoundException e) {
     } catch (IOException e) {
     }
     return results;
