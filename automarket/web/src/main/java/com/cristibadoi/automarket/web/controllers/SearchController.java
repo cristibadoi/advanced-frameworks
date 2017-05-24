@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cristibadoi.automarket.logic.data.PostData;
 import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
 import com.cristibadoi.automarket.logic.query.QueryDetails;
 import com.cristibadoi.automarket.logic.services.PostService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/search")
@@ -69,7 +72,9 @@ public class SearchController {
       queryDetails.setMaxPrice(maxPrice);
     }
 
-    return new ModelAndView("search-results", "results", service.getMatchingPosts(queryDetails));
+    List<PostData> results = service.getMatchingPosts(queryDetails);
+
+    return new ModelAndView("search-results", "results", results);
 
   }
 
