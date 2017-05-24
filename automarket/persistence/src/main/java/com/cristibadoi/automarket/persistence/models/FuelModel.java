@@ -22,7 +22,7 @@ public class FuelModel {
   private String name;
 
   @OneToMany(mappedBy = "fuel")
-  private List<PostModel> posts;
+  private List<ArticleModel> posts;
 
   public FuelModel() {
   }
@@ -47,11 +47,11 @@ public class FuelModel {
     this.name = name;
   }
 
-  public List<PostModel> getPosts() {
+  public List<ArticleModel> getPosts() {
     return posts;
   }
 
-  public void setPosts(List<PostModel> posts) {
+  public void setPosts(List<ArticleModel> posts) {
     this.posts = posts;
   }
 

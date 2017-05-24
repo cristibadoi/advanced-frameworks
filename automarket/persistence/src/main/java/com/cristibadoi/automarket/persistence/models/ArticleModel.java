@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "post")
-public class PostModel {
+public class ArticleModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +34,6 @@ public class PostModel {
 
   @Column(nullable = false)
   private String description;
-
-  @Column(nullable = false)
-  private String images;
 
   @Column(nullable = false)
   private int cylindricalCapacity;
@@ -72,7 +69,7 @@ public class PostModel {
   @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
   private StatusModel status;
 
-  public PostModel() {
+  public ArticleModel() {
   }
 
   public long getId() {
@@ -129,14 +126,6 @@ public class PostModel {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public String getImages() {
-    return images;
-  }
-
-  public void setImages(String images) {
-    this.images = images;
   }
 
   public int getPublicationDate() {
@@ -221,22 +210,26 @@ public class PostModel {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
-    PostModel other = (PostModel) obj;
-    if (id != other.id)
+    }
+    ArticleModel other = (ArticleModel) obj;
+    if (id != other.id) {
       return false;
+    }
     return true;
   }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("PostModel [id=");
+    builder.append("ArticleModel [id=");
     builder.append(id);
     builder.append(", modelYear=");
     builder.append(modelYear);
@@ -250,8 +243,6 @@ public class PostModel {
     builder.append(email);
     builder.append(", description=");
     builder.append(description);
-    builder.append(", images=");
-    builder.append(images);
     builder.append(", cylindricalCapacity=");
     builder.append(cylindricalCapacity);
     builder.append(", publicationDate=");

@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cristibadoi.automarket.exceptions.ApplicationException;
 import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
-import com.cristibadoi.automarket.logic.exceptions.PostNotFoundException;
+import com.cristibadoi.automarket.logic.exceptions.ArticleNotFoundException;
 import com.cristibadoi.automarket.logic.exceptions.UploadFailureException;
 import com.cristibadoi.automarket.web.constants.WebLayerConstants;
 
@@ -33,8 +33,8 @@ public class AppExceptionHandler {
 
   }
 
-  @ExceptionHandler(PostNotFoundException.class)
-  public ModelAndView handlePostNotFoundException(PostNotFoundException ex) {
+  @ExceptionHandler(ArticleNotFoundException.class)
+  public ModelAndView handlePostNotFoundException(ArticleNotFoundException ex) {
 
     ModelAndView model = new ModelAndView("error");
     model.addObject("message", ex.getMessage());

@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cristibadoi.automarket.logic.data.PostData;
+import com.cristibadoi.automarket.logic.data.FullArticleData;
 import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
-import com.cristibadoi.automarket.logic.query.QueryDetails;
-import com.cristibadoi.automarket.logic.services.PostService;
+import com.cristibadoi.automarket.logic.input.QueryInput;
+import com.cristibadoi.automarket.logic.services.ArticleService;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class SearchController {
 
   @Autowired
-  PostService service;
+  ArticleService service;
 
   @GetMapping
   public ModelAndView search(@RequestParam(required = false) String brand, @RequestParam(required = false) String model,
@@ -31,48 +31,48 @@ public class SearchController {
       @RequestParam(required = false) String currency, @RequestParam(required = false) String city)
       throws NoResultsFoundException {
 
-    QueryDetails queryDetails = new QueryDetails();
+    QueryInput queryInput = new QueryInput();
     if (brand != null && !brand.equals("")) {
-      queryDetails.setBrandName(brand);
+      queryInput.setBrandName(brand);
     }
     if (model != null && !model.equals("")) {
-      queryDetails.setModelName(model);
+      queryInput.setModelName(model);
     }
     if (type != null && !type.equals("")) {
-      queryDetails.setType(type);
+      queryInput.setType(type);
     }
     if (fuel != null && !fuel.equals("")) {
-      queryDetails.setFuel(fuel);
+      queryInput.setFuel(fuel);
     }
     if (city != null && !city.equals("")) {
-      queryDetails.setCity(city);
+      queryInput.setCity(city);
     }
     if (minCapacity != null) {
-      queryDetails.setMinCapacity(minCapacity);
+      queryInput.setMinCapacity(minCapacity);
     }
     if (maxCapacity != null) {
-      queryDetails.setMaxCapacity(maxCapacity);
+      queryInput.setMaxCapacity(maxCapacity);
     }
     if (minYear != null) {
-      queryDetails.setMinYear(minYear);
+      queryInput.setMinYear(minYear);
     }
     if (maxYear != null) {
-      queryDetails.setMaxYear(maxYear);
+      queryInput.setMaxYear(maxYear);
     }
     if (minMileage != null) {
-      queryDetails.setMinMileage(minMileage);
+      queryInput.setMinMileage(minMileage);
     }
     if (maxMileage != null) {
-      queryDetails.setMaxMileage(maxMileage);
+      queryInput.setMaxMileage(maxMileage);
     }
     if (minPrice != null) {
-      queryDetails.setMinPrice(minPrice);
+      queryInput.setMinPrice(minPrice);
     }
     if (maxPrice != null) {
-      queryDetails.setMaxPrice(maxPrice);
+      queryInput.setMaxPrice(maxPrice);
     }
 
-    List<PostData> results = service.getMatchingPosts(queryDetails);
+    List<FullArticleData> results = service.getMatchingPosts(queryInput);
 
     return new ModelAndView("search-results", "results", results);
 

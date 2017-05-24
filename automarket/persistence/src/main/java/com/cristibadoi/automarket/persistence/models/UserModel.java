@@ -34,7 +34,7 @@ public class UserModel {
   private boolean enabled;
 
   @OneToMany(mappedBy = "user")
-  private List<PostModel> posts;
+  private List<ArticleModel> posts;
 
   @OneToMany(mappedBy = "sender")
   private List<MessageModel> sentMessages;
@@ -99,11 +99,11 @@ public class UserModel {
     this.enabled = enabled;
   }
 
-  public List<PostModel> getPosts() {
+  public List<ArticleModel> getPosts() {
     return posts;
   }
 
-  public void setPosts(List<PostModel> posts) {
+  public void setPosts(List<ArticleModel> posts) {
     this.posts = posts;
   }
 

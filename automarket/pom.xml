@@ -35,6 +35,7 @@
     <spring-security-version>4.2.2.RELEASE</spring-security-version>
     <commons-fileupload-version>1.3.2</commons-fileupload-version>
     <commons-io-version>2.5</commons-io-version>
+    <guava-version>21.0</guava-version>
   </properties>
 
   <dependencyManagement>
@@ -157,6 +158,13 @@
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
         <version>${commons-io-version}</version>
+      </dependency>
+
+      <!-- Google Guava -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava-version}</version>
       </dependency>
 
     </dependencies>

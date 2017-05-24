@@ -1,6 +1,6 @@
-package com.cristibadoi.automarket.logic.query;
+package com.cristibadoi.automarket.logic.input;
 
-public class QueryDetails {
+public class QueryInput {
 
   private String brandName;
   private String modelName;
@@ -16,7 +16,7 @@ public class QueryDetails {
   private int maxPrice;
   private String city;
 
-  public QueryDetails() {
+  public QueryInput() {
   }
 
   public String getBrandName() {
@@ -126,7 +126,7 @@ public class QueryDetails {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("QueryDetails [brandName=");
+    builder.append("QueryInput [brandName=");
     builder.append(brandName);
     builder.append(", modelName=");
     builder.append(modelName);

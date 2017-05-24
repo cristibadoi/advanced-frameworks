@@ -25,7 +25,7 @@ public class BrandModel {
   private List<ModelModel> models;
 
   @OneToMany(mappedBy = "brand")
-  private List<PostModel> posts;
+  private List<ArticleModel> posts;
 
   public BrandModel() {
   }
@@ -58,11 +58,11 @@ public class BrandModel {
     this.models = models;
   }
 
-  public List<PostModel> getPosts() {
+  public List<ArticleModel> getPosts() {
     return posts;
   }
 
-  public void setPosts(List<PostModel> posts) {
+  public void setPosts(List<ArticleModel> posts) {
     this.posts = posts;
   }
 

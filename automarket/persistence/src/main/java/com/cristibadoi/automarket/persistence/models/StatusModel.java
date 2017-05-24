@@ -22,7 +22,7 @@ public class StatusModel {
   private String name;
 
   @OneToMany(mappedBy = "status")
-  private List<PostModel> posts;
+  private List<ArticleModel> posts;
 
   public StatusModel() {
   }
@@ -47,11 +47,11 @@ public class StatusModel {
     this.name = name;
   }
 
-  public List<PostModel> getPosts() {
+  public List<ArticleModel> getPosts() {
     return posts;
   }
 
-  public void setPosts(List<PostModel> posts) {
+  public void setPosts(List<ArticleModel> posts) {
     this.posts = posts;
   }
 

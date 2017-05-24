@@ -1,14 +1,11 @@
 package com.cristibadoi.automarket.logic.data;
 
-public class PostData {
-
+public class SmallArticleData {
   private int modelYear;
   private int mileage;
   private int price;
-  private String phoneNumber;
-  private String email;
   private String description;
-  private String images;
+  private String Thumbnail;
   private int publicationDate;
   private int cylindricalCapacity;
   private String brandName;
@@ -17,7 +14,7 @@ public class PostData {
   private String cityName;
   private String type;
 
-  public PostData() {
+  public SmallArticleData() {
   }
 
   public int getModelYear() {
@@ -44,36 +41,12 @@ public class PostData {
     this.price = price;
   }
 
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
   public String getDescription() {
     return description;
   }
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public String getImages() {
-    return images;
-  }
-
-  public void setImages(String images) {
-    this.images = images;
   }
 
   public int getPublicationDate() {
@@ -114,7 +87,7 @@ public class PostData {
 
   public void setFuelName(String fuelName) {
     this.fuelName = fuelName;
-  } 
+  }
 
   public String getCityName() {
     return cityName;
@@ -131,5 +104,5 @@ public class PostData {
   public void setType(String type) {
     this.type = type;
   }
-  
+
 }
