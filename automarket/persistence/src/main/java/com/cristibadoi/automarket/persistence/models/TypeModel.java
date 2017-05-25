@@ -2,13 +2,7 @@ package com.cristibadoi.automarket.persistence.models;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "type")
@@ -22,7 +16,7 @@ public class TypeModel {
   private String name;
 
   @OneToMany(mappedBy = "type")
-  private List<ArticleModel> posts;
+  private List<ArticleModel> articles;
 
   public TypeModel() {
   }
@@ -47,12 +41,12 @@ public class TypeModel {
     this.name = name;
   }
 
-  public List<ArticleModel> getPosts() {
-    return posts;
+  public List<ArticleModel> getArticles() {
+    return articles;
   }
 
   public void setModels(List<ArticleModel> posts) {
-    this.posts = posts;
+    this.articles = posts;
   }
 
   @Override
@@ -65,15 +59,19 @@ public class TypeModel {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     TypeModel other = (TypeModel) obj;
-    if (id != other.id)
+    if (id != other.id) {
       return false;
+    }
     return true;
   }
 

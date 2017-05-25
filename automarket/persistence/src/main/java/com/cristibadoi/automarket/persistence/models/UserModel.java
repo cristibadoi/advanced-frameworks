@@ -2,16 +2,7 @@ package com.cristibadoi.automarket.persistence.models;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
@@ -34,7 +25,7 @@ public class UserModel {
   private boolean enabled;
 
   @OneToMany(mappedBy = "user")
-  private List<ArticleModel> posts;
+  private List<ArticleModel> articles;
 
   @OneToMany(mappedBy = "sender")
   private List<MessageModel> sentMessages;
@@ -52,7 +43,7 @@ public class UserModel {
   public UserModel(String username) {
     this.username = username;
   }
-  
+
   public UserModel(String username, String password, String email) {
     this.username = username;
     this.password = password;
@@ -99,12 +90,12 @@ public class UserModel {
     this.enabled = enabled;
   }
 
-  public List<ArticleModel> getPosts() {
-    return posts;
+  public List<ArticleModel> getArticles() {
+    return articles;
   }
 
-  public void setPosts(List<ArticleModel> posts) {
-    this.posts = posts;
+  public void setArticles(List<ArticleModel> articles) {
+    this.articles = articles;
   }
 
   public List<MessageModel> getSentMessages() {
@@ -141,15 +132,19 @@ public class UserModel {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     UserModel other = (UserModel) obj;
-    if (id != other.id)
+    if (id != other.id) {
       return false;
+    }
     return true;
   }
 
