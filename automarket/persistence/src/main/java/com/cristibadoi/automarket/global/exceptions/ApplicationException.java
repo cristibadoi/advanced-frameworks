@@ -1,4 +1,4 @@
-package com.cristibadoi.automarket.exceptions;
+package com.cristibadoi.automarket.global.exceptions;
 
 public class ApplicationException extends Exception {
 

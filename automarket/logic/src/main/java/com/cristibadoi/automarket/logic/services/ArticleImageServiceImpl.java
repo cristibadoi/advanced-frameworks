@@ -39,7 +39,7 @@ public class ArticleImageServiceImpl implements ArticleImageService {
         stream.close();
       } catch (IOException e) {
         deleteFolder(uploadFolder);
-        throw new UploadFailureException(e.getMessage());
+        throw new UploadFailureException(ServiceLayerConstants.IMAGE_UPLOAD_FAILURE_MESSAGE);
       }
     }
 

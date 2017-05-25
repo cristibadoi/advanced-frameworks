@@ -4,11 +4,13 @@ import com.cristibadoi.automarket.logic.exceptions.UploadFailureException;
 import com.cristibadoi.automarket.logic.input.PublishInput;
 import com.cristibadoi.automarket.logic.services.ArticleService;
 import com.cristibadoi.automarket.logic.services.ModelExtractorService;
-import com.cristibadoi.automarket.logic.validators.ArticleValidator;
+import com.cristibadoi.automarket.logic.validators.PublishInputValidator;
 import com.cristibadoi.automarket.web.constants.WebLayerConstants;
+import com.cristibadoi.automarket.web.exceptions.InvalidPublishInputException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +30,7 @@ public class PublishController {
   private ArticleService articleService;
 
   @Autowired
-  private ArticleValidator articleValidator;
+  private PublishInputValidator publishInputValidator;
 
   @GetMapping
   public ModelAndView getPublishView() {
@@ -45,12 +47,14 @@ public class PublishController {
   }
 
   @PostMapping
-  public ModelAndView publishArticle(@RequestParam String brand, @RequestParam String model, @RequestParam String type,
-                                     @RequestParam String fuel, @RequestParam Integer year,
-                                     @RequestParam Integer capacity, @RequestParam Integer mileage,
-                                     @RequestParam String description, @RequestParam Integer price,
-                                     @RequestParam String city, @RequestParam String phone, @RequestParam String email,
-                                     @RequestParam MultipartFile[] images) throws UploadFailureException {
+  public ModelAndView redirectAsModelAttribute(@RequestParam String brand, @RequestParam String model,
+                                               @RequestParam String type,
+                                               @RequestParam String fuel, @RequestParam Integer year,
+                                               @RequestParam Integer capacity, @RequestParam Integer mileage,
+                                               @RequestParam String description, @RequestParam Integer price,
+                                               @RequestParam String city, @RequestParam String phone,
+                                               @RequestParam String email,
+                                               @RequestParam MultipartFile[] images) {
 
     PublishInput publishInput = new PublishInput();
     publishInput.setBrand(brand);
@@ -66,12 +70,29 @@ public class PublishController {
     publishInput.setPhone(phone);
     publishInput.setEmail(email);
     publishInput.setImages(images);
+
+    ModelAndView redirect = new ModelAndView("redirect:/publish/finalize");
+    redirect.addObject("publishInput", publishInput);
+    return redirect;
+  }
+
+  @PostMapping("/finalize")
+  public ModelAndView publishArticle(@ModelAttribute("publishInput") PublishInput publishInput, BindingResult result)
+      throws UploadFailureException, InvalidPublishInputException {
+
+    publishInputValidator.validate(publishInput, result);
+
+    if (result.hasErrors()) {
+      //TO DO log specific errors
+      throw new InvalidPublishInputException(WebLayerConstants.INVALID_PUBLISH_INPUT_MESSAGE);
+    }
+
     articleService.saveArticle(publishInput);
 
-    ModelAndView result = new ModelAndView("success");
-    result.addObject("message", WebLayerConstants.POST_PUBLISH_SUCCESS);
+    ModelAndView view = new ModelAndView("success");
+    view.addObject("message", WebLayerConstants.POST_PUBLISH_SUCCESS);
 
-    return result;
+    return view;
 
   }
 

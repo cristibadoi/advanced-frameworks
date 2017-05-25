@@ -1,20 +1,10 @@
 package com.cristibadoi.automarket.logic.services;
 
-import java.io.File;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.cristibadoi.automarket.logic.constants.ServiceLayerConstants;
 import com.cristibadoi.automarket.logic.converters.EntityConverter;
 import com.cristibadoi.automarket.logic.data.FullArticleData;
-import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
 import com.cristibadoi.automarket.logic.exceptions.ArticleNotFoundException;
+import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
 import com.cristibadoi.automarket.logic.exceptions.UploadFailureException;
 import com.cristibadoi.automarket.logic.input.ArticlePredicates;
 import com.cristibadoi.automarket.logic.input.PublishInput;
@@ -22,6 +12,16 @@ import com.cristibadoi.automarket.logic.input.QueryInput;
 import com.cristibadoi.automarket.persistence.models.ArticleModel;
 import com.cristibadoi.automarket.persistence.repositories.ArticleRepository;
 import com.google.common.collect.Lists;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.File;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -62,7 +62,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     ArticleModel result = articleRepository.findById(id);
     if (result == null) {
-      throw new ArticleNotFoundException(ServiceLayerConstants.POST_NOT_FOUND_MESSAGE);
+      throw new ArticleNotFoundException(ServiceLayerConstants.ARTICLE_NOT_FOUND_MESSAGE);
     }
 
     return postConverter.convertModelToData(result);

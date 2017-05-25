@@ -1,16 +1,16 @@
 package com.cristibadoi.automarket.web.controllers;
 
+import com.cristibadoi.automarket.logic.data.FullArticleData;
+import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
+import com.cristibadoi.automarket.logic.input.QueryInput;
+import com.cristibadoi.automarket.logic.services.ArticleService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.cristibadoi.automarket.logic.data.FullArticleData;
-import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
-import com.cristibadoi.automarket.logic.input.QueryInput;
-import com.cristibadoi.automarket.logic.services.ArticleService;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class SearchController {
 
   @Autowired
-  ArticleService service;
+  ArticleService articleService;
 
   @GetMapping
   public ModelAndView search(@RequestParam(required = false) String brand, @RequestParam(required = false) String model,
@@ -72,7 +72,7 @@ public class SearchController {
       queryInput.setMaxPrice(maxPrice);
     }
 
-    List<FullArticleData> results = service.getMatchingPosts(queryInput);
+    List<FullArticleData> results = articleService.getMatchingPosts(queryInput);
 
     return new ModelAndView("search-results", "results", results);
 
