@@ -10,8 +10,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.regex.Pattern;
-
 @Component
 public class PublishInputValidator implements Validator {
 
@@ -150,10 +148,16 @@ public class PublishInputValidator implements Validator {
   private boolean validateImageExtensions(MultipartFile[] images) {
     boolean result = false;
     for (MultipartFile image : images) {
-      String imageExtension = image.getName().split(".")[1];
-      if (imageExtension.equals("jpeg") || imageExtension.equals("jpg") || imageExtension.equals("png")) {
-        result = true;
+      try {
+        String[] parts = image.getOriginalFilename().split("\\.");
+        String imageExtension = parts[1];
+        if (imageExtension.equals("jpeg") || imageExtension.equals("jpg") || imageExtension.equals("png")) {
+          result = true;
+        }
+      } catch (IndexOutOfBoundsException e) {
+        return false;
       }
+
     }
     return result;
   }
