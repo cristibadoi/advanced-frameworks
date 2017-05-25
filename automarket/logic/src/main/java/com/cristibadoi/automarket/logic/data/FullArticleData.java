@@ -13,11 +13,12 @@ public class FullArticleData {
   private List<String> imageLinks;
   private int publicationDate;
   private int cylindricalCapacity;
+  private String userName;
   private String brandName;
   private String modelName;
   private String fuelName;
   private String cityName;
-  private String type;
+  private String typeName;
 
   public FullArticleData() {
   }
@@ -94,6 +95,14 @@ public class FullArticleData {
     this.cylindricalCapacity = cylindricalCapacity;
   }
 
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
   public String getBrandName() {
     return brandName;
   }
@@ -126,12 +135,20 @@ public class FullArticleData {
     this.cityName = cityName;
   }
 
-  public String getType() {
-    return type;
+  public String getTypeName() {
+    return typeName;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  public void setTypeName(String typeName) {
+    this.typeName = typeName;
+  }
+
+  public List<String> getImageLinks() {
+    return imageLinks;
+  }
+
+  public void setImageLinks(List<String> imageLinks) {
+    this.imageLinks = imageLinks;
   }
 
 }

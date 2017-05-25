@@ -1,8 +1,9 @@
 package com.cristibadoi.automarket.web.controllers;
 
-import com.cristibadoi.automarket.logic.data.FullArticleData;
+import com.cristibadoi.automarket.logic.data.SmallArticleData;
 import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
 import com.cristibadoi.automarket.logic.input.QueryInput;
+import com.cristibadoi.automarket.logic.services.ArticleImageService;
 import com.cristibadoi.automarket.logic.services.ArticleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,22 @@ public class SearchController {
   @Autowired
   ArticleService articleService;
 
+  @Autowired
+  ArticleImageService articleImageService;
+
   @GetMapping
   public ModelAndView search(@RequestParam(required = false) String brand, @RequestParam(required = false) String model,
-      @RequestParam(required = false) String type, @RequestParam(required = false) String fuel,
-      @RequestParam(required = false) Integer minCapacity, @RequestParam(required = false) Integer maxCapacity,
-      @RequestParam(required = false) Integer minYear, @RequestParam(required = false) Integer maxYear,
-      @RequestParam(required = false) Integer minMileage, @RequestParam(required = false) Integer maxMileage,
-      @RequestParam(required = false) Integer minPrice, @RequestParam(required = false) Integer maxPrice,
-      @RequestParam(required = false) String currency, @RequestParam(required = false) String city)
+                             @RequestParam(required = false) String type, @RequestParam(required = false) String fuel,
+                             @RequestParam(required = false) Integer minCapacity,
+                             @RequestParam(required = false) Integer maxCapacity,
+                             @RequestParam(required = false) Integer minYear,
+                             @RequestParam(required = false) Integer maxYear,
+                             @RequestParam(required = false) Integer minMileage,
+                             @RequestParam(required = false) Integer maxMileage,
+                             @RequestParam(required = false) Integer minPrice,
+                             @RequestParam(required = false) Integer maxPrice,
+                             @RequestParam(required = false) String currency,
+                             @RequestParam(required = false) String city)
       throws NoResultsFoundException {
 
     QueryInput queryInput = new QueryInput();
@@ -72,7 +81,7 @@ public class SearchController {
       queryInput.setMaxPrice(maxPrice);
     }
 
-    List<FullArticleData> results = articleService.getMatchingPosts(queryInput);
+    List<SmallArticleData> results = articleService.getMatchingSmallArticles(queryInput);
 
     return new ModelAndView("search-results", "results", results);
 

@@ -11,7 +11,7 @@ import com.cristibadoi.automarket.logic.services.ArticleImageService;
 import com.cristibadoi.automarket.persistence.models.ArticleModel;
 
 @Component
-public class ArticleConverter implements EntityConverter<ArticleModel, FullArticleData> {
+public class FullArticleConverter implements EntityConverter<ArticleModel, FullArticleData> {
 
   @Autowired
   private ArticleImageService articleImageService;
@@ -27,11 +27,12 @@ public class ArticleConverter implements EntityConverter<ArticleModel, FullArtic
     result.setDescription(article.getDescription());
     result.setPublicationDate(article.getPublicationDate());
     result.setCylindricalCapacity(article.getCylindricalCapacity());
+    result.setUserName(article.getUser().getUsername());
     result.setBrandName(article.getBrand().getName());
     result.setModelName(article.getModel().getName());
     result.setFuelName(article.getFuel().getName());
     result.setCityName(article.getCity().getName());
-    result.setType(article.getType().getName());
+    result.setTypeName(article.getType().getName());
     result.setImages(articleImageService.getImageLinks(article));
     return result;
   }

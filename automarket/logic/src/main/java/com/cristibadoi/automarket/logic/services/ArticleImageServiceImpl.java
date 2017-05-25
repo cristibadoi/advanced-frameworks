@@ -62,7 +62,7 @@ public class ArticleImageServiceImpl implements ArticleImageService {
     try {
       FileUtils.delete(folder);
     } catch (IOException e) {
-      //TO DO log failure to delete remnant files
+      //TODO log failure to delete remnant files
     }
   }
 

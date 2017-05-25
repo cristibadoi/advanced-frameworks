@@ -1,11 +1,11 @@
 package com.cristibadoi.automarket.logic.data;
 
 public class SmallArticleData {
+
   private int modelYear;
   private int mileage;
   private int price;
-  private String description;
-  private String Thumbnail;
+  private String imageLink;
   private int publicationDate;
   private int cylindricalCapacity;
   private String brandName;
@@ -41,12 +41,12 @@ public class SmallArticleData {
     this.price = price;
   }
 
-  public String getDescription() {
-    return description;
+  public String getImageLink() {
+    return imageLink;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public void setImageLink(String imageLink) {
+    this.imageLink = imageLink;
   }
 
   public int getPublicationDate() {

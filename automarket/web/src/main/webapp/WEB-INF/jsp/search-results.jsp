@@ -59,7 +59,7 @@
     <c:forEach items="${results}" var="element">
       <article class="search-result row">
         <div class="col-xs-12 col-sm-12 col-md-3">
-          <a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people"
+          <a href="#" title="Lorem ipsum" class="thumbnail"><img src="/images/${element.imageLink}"
                                                                  alt="Lorem ipsum"/></a>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-2">

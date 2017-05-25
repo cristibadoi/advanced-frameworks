@@ -21,7 +21,7 @@ public class ArticleController {
   public ModelAndView getPostPage(@PathVariable(value = "articleId") long id) throws ArticleNotFoundException {
 
     ModelAndView model = new ModelAndView("article");
-    model.addObject("article", articleService.getPostById(id));
+    model.addObject("article", articleService.getFullArticleById(id));
 
     return model;
 

@@ -3,6 +3,7 @@ package com.cristibadoi.automarket.logic.services;
 import com.cristibadoi.automarket.logic.constants.ServiceLayerConstants;
 import com.cristibadoi.automarket.logic.converters.EntityConverter;
 import com.cristibadoi.automarket.logic.data.FullArticleData;
+import com.cristibadoi.automarket.logic.data.SmallArticleData;
 import com.cristibadoi.automarket.logic.exceptions.ArticleNotFoundException;
 import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
 import com.cristibadoi.automarket.logic.exceptions.UploadFailureException;
@@ -30,7 +31,10 @@ public class ArticleServiceImpl implements ArticleService {
   private ArticleRepository articleRepository;
 
   @Autowired
-  private EntityConverter<ArticleModel, FullArticleData> postConverter;
+  private EntityConverter<ArticleModel, FullArticleData> fullArticleConverter;
+
+  @Autowired
+  private EntityConverter<ArticleModel, SmallArticleData> smallArticleConverter;
 
   @Autowired
   private ArticlePredicates articlePredicates;
@@ -43,7 +47,7 @@ public class ArticleServiceImpl implements ArticleService {
 
   @Override
   @Transactional(readOnly = true)
-  public List<FullArticleData> getMatchingPosts(QueryInput queryInput) throws NoResultsFoundException {
+  public List<FullArticleData> getMatchingFullArticles(QueryInput queryInput) throws NoResultsFoundException {
 
     List<ArticleModel> results = Lists.newArrayList(
         articleRepository.findAll(articlePredicates.createPredicate(queryInput)));
@@ -52,20 +56,48 @@ public class ArticleServiceImpl implements ArticleService {
       throw new NoResultsFoundException(ServiceLayerConstants.NO_MATCHING_RESULTS_MESSAGE);
     }
 
-    return postConverter.convertModelToDataList(results);
+    return fullArticleConverter.convertModelToDataList(results);
 
   }
 
   @Override
   @Transactional(readOnly = true)
-  public FullArticleData getPostById(long id) throws ArticleNotFoundException {
+  public FullArticleData getFullArticleById(long id) throws ArticleNotFoundException {
 
     ArticleModel result = articleRepository.findById(id);
     if (result == null) {
       throw new ArticleNotFoundException(ServiceLayerConstants.ARTICLE_NOT_FOUND_MESSAGE);
     }
 
-    return postConverter.convertModelToData(result);
+    return fullArticleConverter.convertModelToData(result);
+
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List<SmallArticleData> getMatchingSmallArticles(QueryInput queryInput) throws NoResultsFoundException {
+
+    List<ArticleModel> results = Lists.newArrayList(
+        articleRepository.findAll(articlePredicates.createPredicate(queryInput)));
+
+    if (results.isEmpty()) {
+      throw new NoResultsFoundException(ServiceLayerConstants.NO_MATCHING_RESULTS_MESSAGE);
+    }
+
+    return smallArticleConverter.convertModelToDataList(results);
+
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public SmallArticleData getSmallArticleById(long id) throws ArticleNotFoundException {
+
+    ArticleModel result = articleRepository.findById(id);
+    if (result == null) {
+      throw new ArticleNotFoundException(ServiceLayerConstants.ARTICLE_NOT_FOUND_MESSAGE);
+    }
+
+    return smallArticleConverter.convertModelToData(result);
 
   }
 
