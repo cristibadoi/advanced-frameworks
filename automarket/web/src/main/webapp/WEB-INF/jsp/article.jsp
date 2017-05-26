@@ -46,9 +46,42 @@
 </sec:authorize>
 
 <div class="container">
-  <c:forEach items="${article.imageLinks}" var="item">
-    <img class="img-responsive" src="/images/${item}">
-  </c:forEach>
+  <ul class="list-inline">
+    <c:forEach items="${article.imageLinks}" var="item">
+      <li><a href="/images/${item}"><img class="img-responsive" src="/images/${item}" width="300"></a></li>
+    </c:forEach>
+  </ul>
+
+  <ul class="list-group">
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-price"/></strong>&nbsp${article.price}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-brand"/></strong>&nbsp${article.brandName}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-model"/></strong>&nbsp${article.modelName}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-year"/></strong>&nbsp${article.modelYear}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-mileage"/></strong>&nbsp${article.mileage}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-fuel"/></strong>&nbsp${article.fuelName}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message code="label.article-capacity"/></strong>&nbsp${article.cylindricalCapacity}
+    </li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-type"/></strong>&nbsp${article.typeName}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message code="label.article-description"/></strong>&nbsp${article.description}
+    </li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-city"/></strong>&nbsp${article.cityName}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-phone"/></strong>&nbsp${article.phoneNumber}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-email"/></strong>&nbsp${article.email}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-user"/></strong>&nbsp${article.userName}</li>
+    <li class="list-group-item"><strong class="text-danger"><spring:message
+        code="label.article-date"/></strong>&nbsp${article.publicationDate}</li>
+  </ul>
 </div>
 
 </body>
