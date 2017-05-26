@@ -1,7 +1,7 @@
 package com.cristibadoi.automarket.authentication;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.cristibadoi.automarket.persistence.models.RoleModel;
+import com.cristibadoi.automarket.persistence.models.UserModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cristibadoi.automarket.persistence.models.RoleModel;
-import com.cristibadoi.automarket.persistence.models.UserModel;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-        grantedAuthorities);
+                                                                  grantedAuthorities);
 
   }
 

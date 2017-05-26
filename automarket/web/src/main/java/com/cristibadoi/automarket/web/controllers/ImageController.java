@@ -1,10 +1,7 @@
 package com.cristibadoi.automarket.web.controllers;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.servlet.ServletContext;
+import com.cristibadoi.automarket.logic.constants.ServiceLayerConstants;
+import com.cristibadoi.automarket.logic.exceptions.DownloadFailureException;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cristibadoi.automarket.logic.constants.ServiceLayerConstants;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.servlet.ServletContext;
 
 @Controller
 @RequestMapping("/images")
@@ -24,17 +26,22 @@ public class ImageController {
   ServletContext servletContext;
 
   @ResponseBody
-  @GetMapping(value = "/{folderPath}/{imageId}")
-  public byte[] getImage(@PathVariable String folderPath, @PathVariable String imageId) {
-    String absoluteImagePath = System.getProperty(ServiceLayerConstants.CATALINA_HOME) + File.separator
-        + ServiceLayerConstants.LOCAL_IMAGES_PARENT_FOLDER + File.separator + folderPath + File.separator + imageId;
-    InputStream in = servletContext.getResourceAsStream(absoluteImagePath);
-    System.out.println(absoluteImagePath);
+  @GetMapping(value = "/{articleId}/{imageName:.+}")
+  public byte[] getImage(@PathVariable String articleId, @PathVariable String imageName)
+      throws DownloadFailureException {
+
+    String absoluteImagePath = ServiceLayerConstants.IMAGES_PARENT_FOLDER + File.separator + articleId + File.separator
+                               + imageName;
     byte[] results = null;
     try {
+      InputStream in = new FileInputStream(absoluteImagePath);
       results = IOUtils.toByteArray(in);
     } catch (IOException e) {
+      throw new DownloadFailureException(ServiceLayerConstants.IMAGE_DOWNLOAD_FAILURE_MESSAGE);
     }
+
     return results;
+
   }
+
 }

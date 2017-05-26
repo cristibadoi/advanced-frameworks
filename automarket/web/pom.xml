@@ -17,6 +17,8 @@
   <packaging>war</packaging>
 
   <dependencies>
+
+    <!-- Remote dependencies -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -65,9 +67,11 @@
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
     </dependency>
+
+    <!-- Project dependencies -->
     <dependency>
       <groupId>cristibadoi</groupId>
-      <artifactId>services</artifactId>
+      <artifactId>logic</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>

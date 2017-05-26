@@ -1,43 +1,41 @@
 package com.cristibadoi.automarket.web.controllers;
 
-import java.io.File;
-import java.util.Date;
+import com.cristibadoi.automarket.logic.exceptions.UploadFailureException;
+import com.cristibadoi.automarket.logic.input.PublishInput;
+import com.cristibadoi.automarket.logic.services.ArticleService;
+import com.cristibadoi.automarket.logic.services.ModelExtractorService;
+import com.cristibadoi.automarket.logic.validators.PublishInputValidator;
+import com.cristibadoi.automarket.web.constants.WebLayerConstants;
+import com.cristibadoi.automarket.web.exceptions.InvalidPublishInputException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.cristibadoi.automarket.logic.constants.ServiceLayerConstants;
-import com.cristibadoi.automarket.logic.exceptions.UploadFailureException;
-import com.cristibadoi.automarket.logic.services.ImageUploadService;
-import com.cristibadoi.automarket.logic.services.ModelExtractorService;
-import com.cristibadoi.automarket.logic.services.PostService;
-import com.cristibadoi.automarket.persistence.models.PostModel;
-import com.cristibadoi.automarket.web.constants.WebLayerConstants;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/publish")
 public class PublishController {
 
   @Autowired
-  ModelExtractorService modelExtractor;
+  private ModelExtractorService modelExtractor;
 
   @Autowired
-  PostService postService;
+  private ArticleService articleService;
 
   @Autowired
-  ImageUploadService imageUploadService;
+  private PublishInputValidator publishInputValidator;
 
   @GetMapping
-  public ModelAndView publishPage() {
+  public ModelAndView getPublishView() {
 
     ModelAndView model = new ModelAndView("publish");
     model.addObject("brands", modelExtractor.getAllBrands());
@@ -50,47 +48,53 @@ public class PublishController {
 
   }
 
-  @Transactional
   @PostMapping
-  public ModelAndView publishPost(@RequestParam String brand, @RequestParam String model, @RequestParam String type,
-      @RequestParam String fuel, @RequestParam Integer year, @RequestParam Integer capacity,
-      @RequestParam Integer mileage, @RequestParam String description, @RequestParam Integer price,
-      @RequestParam String city, @RequestParam String phone, @RequestParam String email,
-      @RequestParam MultipartFile[] images) throws UploadFailureException {
+  public ModelAndView redirectAsModelAttribute(@RequestParam String brand, @RequestParam String model,
+                                               @RequestParam String type,
+                                               @RequestParam String fuel, @RequestParam Integer year,
+                                               @RequestParam Integer capacity, @RequestParam Integer mileage,
+                                               @RequestParam String description, @RequestParam Integer price,
+                                               @RequestParam String city, @RequestParam String phone,
+                                               @RequestParam String email,
+                                               @RequestParam MultipartFile[] images, RedirectAttributes redirectAttributes) {
 
-    User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    long unixTime = new Date().getTime() / 1000;
-    String rootPath = System.getProperty(ServiceLayerConstants.CATALINA_HOME);
-    String imagesParentFolder = ServiceLayerConstants.LOCAL_IMAGES_PARENT_FOLDER;
-    File folder = new File(
-        rootPath + File.separator + imagesParentFolder + File.separator + currentUser.getUsername() + unixTime);
+    PublishInput publishInput = new PublishInput();
+    publishInput.setBrand(brand);
+    publishInput.setModel(model);
+    publishInput.setType(type);
+    publishInput.setFuel(fuel);
+    publishInput.setYear(year);
+    publishInput.setCapacity(capacity);
+    publishInput.setMileage(mileage);
+    publishInput.setDescription(description);
+    publishInput.setPrice(price);
+    publishInput.setCity(city);
+    publishInput.setPhone(phone);
+    publishInput.setEmail(email);
+    publishInput.setImages(images);
 
-    imageUploadService.uploadFiles(folder, images);
-    
-    PostModel post = new PostModel();
-    post.setUser(modelExtractor.findUserByUsername(currentUser.getUsername()));
-    post.setBrand(modelExtractor.findBrandByName(brand));
-    post.setModel(modelExtractor.findModelByName(model));
-    post.setType(modelExtractor.findTypeByName(type));
-    post.setFuel(modelExtractor.findFuelByName(fuel));
-    post.setCity(modelExtractor.findCityByName(city));
-    post.setStatus(modelExtractor.findStatusByName(WebLayerConstants.POST_STATUS_ACTIVE));
-    post.setModelYear(year);
-    post.setCylindricalCapacity(capacity);
-    post.setMileage(mileage);
-    post.setDescription(description);
-    post.setPrice(price);
-    post.setPhoneNumber(phone);
-    post.setEmail(email);
-    post.setImages(folder.getAbsolutePath());
-    post.setPublicationDate((int) unixTime);
-    
-    postService.save(post);
+    ModelAndView redirect = new ModelAndView("redirect:/publish/finalize");
+    redirectAttributes.addFlashAttribute("publishInput", publishInput);
+    return redirect;
+  }
 
-    ModelAndView result = new ModelAndView("success");
-    result.addObject("message", WebLayerConstants.POST_PUBLISH_SUCCESS);
+  @GetMapping("/finalize")
+  public ModelAndView publishArticle(@ModelAttribute("publishInput") PublishInput publishInput, BindingResult result)
+      throws UploadFailureException, InvalidPublishInputException {
 
-    return result;
+    publishInputValidator.validate(publishInput, result);
+
+    if (result.hasErrors()) {
+      //TODO log all errors
+      throw new InvalidPublishInputException(WebLayerConstants.INVALID_PUBLISH_INPUT_MESSAGE);
+    }
+
+    articleService.saveArticle(publishInput);
+
+    ModelAndView view = new ModelAndView("success");
+    view.addObject("message", WebLayerConstants.POST_PUBLISH_SUCCESS);
+
+    return view;
 
   }
 
