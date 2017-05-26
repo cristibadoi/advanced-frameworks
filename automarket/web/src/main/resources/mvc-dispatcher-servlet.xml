@@ -1,56 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-  xmlns:mvc="http://www.springframework.org/schema/mvc"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/context 
   http://www.springframework.org/schema/context/spring-context.xsd
   http://www.springframework.org/schema/mvc 
   http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-  <mvc:annotation-driven />
+  <mvc:annotation-driven/>
+
+  <mvc:cors>
+    <mvc:mapping path="/**"
+                 allowed-origins="*"
+                 allowed-headers="Access-Control-Allow-*"
+                 allowed-methods="*"/>
+  </mvc:cors>
 
   <!-- WEB RESOURCES MAPPING -->
 
-  <mvc:resources mapping="/webjars/**" location="/webjars/" />
-  <mvc:resources mapping="/resources/**" location="/resources/" />
+  <mvc:resources mapping="/webjars/**" location="/webjars/"/>
+  <mvc:resources mapping="/resources/**" location="/resources/"/>
 
   <!-- JSP VIEW RESOLVER -->
 
   <bean
-    class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix" value="/WEB-INF/jsp/" />
-    <property name="suffix" value=".jsp" />
+      class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/jsp/"/>
+    <property name="suffix" value=".jsp"/>
   </bean>
 
   <!-- SCANNED PACKAGES -->
 
-  <context:component-scan base-package="com.cristibadoi.automarket.web.controllers" />
+  <context:component-scan base-package="com.cristibadoi.automarket.web.controllers"/>
 
   <!-- INTERNATIONALIZATION -->
 
   <bean id="messageSource"
-    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-    <property name="basename" value="classpath:labels/labels" />
-    <property name="defaultEncoding" value="UTF-8" />
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <property name="basename" value="classpath:labels/labels"/>
+    <property name="defaultEncoding" value="UTF-8"/>
   </bean>
 
   <bean id="localeResolver"
-    class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-    <property name="defaultLocale" value="en_US" />
-    <property name="cookieName" value="automarketLocaleCookie" />
-    <property name="cookieMaxAge" value="3600" />
+        class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+    <property name="defaultLocale" value="en_US"/>
+    <property name="cookieName" value="automarketLocaleCookie"/>
+    <property name="cookieMaxAge" value="3600"/>
   </bean>
 
   <mvc:interceptors>
     <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-      <property name="paramName" value="locale" />
+      <property name="paramName" value="locale"/>
     </bean>
   </mvc:interceptors>
 
   <!-- BEAN FOR CONTROLLER IMAGE PARSING -->
   <bean id="multipartResolver"
-    class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
 </beans>

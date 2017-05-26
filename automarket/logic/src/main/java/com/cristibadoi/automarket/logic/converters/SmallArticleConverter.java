@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -17,20 +18,22 @@ public class SmallArticleConverter implements EntityConverter<ArticleModel, Smal
   ArticleImageService articleImageService;
 
   @Override
-  public SmallArticleData convertModelToData(ArticleModel model) {
+  public SmallArticleData convertModelToData(ArticleModel article) {
 
     SmallArticleData smallArticleData = new SmallArticleData();
-    smallArticleData.setModelYear(model.getModelYear());
-    smallArticleData.setMileage(model.getMileage());
-    smallArticleData.setPrice(model.getPrice());
-    smallArticleData.setImageLink(articleImageService.getImageLinks(model).get(0));
-    smallArticleData.setPublicationDate(model.getPublicationDate());
-    smallArticleData.setCylindricalCapacity(model.getCylindricalCapacity());
-    smallArticleData.setBrandName(model.getBrand().getName());
-    smallArticleData.setModelName(model.getModel().getName());
-    smallArticleData.setFuelName(model.getFuel().getName());
-    smallArticleData.setCityName(model.getCity().getName());
-    smallArticleData.setType(model.getType().getName());
+
+    smallArticleData.setId(article.getId());
+    smallArticleData.setModelYear(article.getModelYear());
+    smallArticleData.setMileage(article.getMileage());
+    smallArticleData.setPrice(article.getPrice());
+    smallArticleData.setImageLink(articleImageService.getImageLinks(article).get(0));
+    smallArticleData.setPublicationDate(new Date((long) article.getPublicationDate() * 1000));
+    smallArticleData.setCylindricalCapacity(article.getCylindricalCapacity());
+    smallArticleData.setBrandName(article.getBrand().getName());
+    smallArticleData.setModelName(article.getModel().getName());
+    smallArticleData.setFuelName(article.getFuel().getName());
+    smallArticleData.setCityName(article.getCity().getName());
+    smallArticleData.setType(article.getType().getName());
 
     return smallArticleData;
   }
@@ -44,7 +47,7 @@ public class SmallArticleConverter implements EntityConverter<ArticleModel, Smal
     }
 
     return smallArticleDataList;
-    
+
   }
 
 }

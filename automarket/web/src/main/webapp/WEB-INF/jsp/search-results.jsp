@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 
@@ -23,9 +24,6 @@
       <sec:authorize access="isAnonymous()">
         <li><a href="<c:url value="/login" />"><spring:message code="label.menu-login-button"/></a></li>
         <li><a href="<c:url value="/register" />"><spring:message code="label.menu-register-button"/></a></li>
-      </sec:authorize>
-      <sec:authorize access="isAuthenticated()">
-        <li><a href="<c:url value="/messages" />"><spring:message code="label.menu-messages-button"/></a></li>
       </sec:authorize>
       <li><a href="<c:url value="/publish" />"><spring:message code="label.menu-publish-button"/></a></li>
       <sec:authorize access="isAuthenticated()">
@@ -49,33 +47,42 @@
 </sec:authorize>
 
 <div class="container">
-
   <h1><spring:message code="label.results-header"/></h1>
-  <h2 class="lead"><strong class="text-danger">3</strong> results were found for the search for <strong
-      class="text-danger">Lorem</strong></h2>
+  <h2 class="lead"><strong class="text-danger"><spring:message
+      code="label.results-found"/></strong>
+    ${results.size()}</h2>
 
   <section class="col-xs-12 col-sm-6 col-md-12">
-
     <c:forEach items="${results}" var="element">
+      <fmt:formatDate value="${element.publicationDate}" type="both" dateStyle="medium" timeStyle="short"
+                      var="publicationDate"></fmt:formatDate>
       <article class="search-result row">
         <div class="col-xs-12 col-sm-12 col-md-3">
-          <a href="#" title="Lorem ipsum" class="thumbnail"><img src="/images/${element.imageLink}"
-                                                                 alt="Lorem ipsum"/></a>
+          <a href="/article/${element.id}" title="${element.imageLink.split("/")[1]}" class="thumbnail"><img
+              src="/images/${element.imageLink}"
+              alt="${element.imageLink.split("/")[1]}"/></a>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-2">
-          <ul class="meta-search">
-            <li><i class="glyphicon glyphicon-calendar"></i> <span>02/15/2014</span></li>
-            <li><i class="glyphicon glyphicon-time"></i> <span>4:28 pm</span></li>
-            <li><i class="glyphicon glyphicon-tags"></i> <span>People</span></li>
+        <div class="col-xs-12 col-sm-12 col-md-7">
+          <h3><a href="/article/${element.id}"><strong class="text-danger">${element.price}&nbspEUR</strong>&nbsp;-&nbsp;${element.brandName}&nbsp;${element.modelName}
+          </a></h3>
+          <ul class="list-inline">
+            <li>
+              <ul class="list-unstyled">
+                <li><strong><spring:message code="label.results-date"/></strong>&nbsp${publicationDate}</li>
+                <li><strong><spring:message code="label.results-year"/></strong>&nbsp${element.modelYear}</li>
+                <li><strong><spring:message code="label.results-body-type"/></strong>&nbsp${element.type}</li>
+              </ul>
+            </li>
+            <li>
+              <ul class="list-unstyled">
+                <li><strong><spring:message code="label.results-mileage"/></strong>&nbsp${element.mileage}&nbsp;km</li>
+                <li><strong><spring:message code="label.results-capacity"/></strong>&nbsp${element.cylindricalCapacity}&nbsp;cc
+                </li>
+                <li><strong><spring:message code="label.results-fuel"/></strong>&nbsp${element.fuelName}</li>
+              </ul>
+            </li>
           </ul>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-          <h3><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio,
-            qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
-          <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
-        </div>
-        <span class="clearfix borda"></span>
       </article>
     </c:forEach>
 

@@ -27,12 +27,6 @@ public class UserModel {
   @OneToMany(mappedBy = "user")
   private List<ArticleModel> articles;
 
-  @OneToMany(mappedBy = "sender")
-  private List<MessageModel> sentMessages;
-
-  @OneToMany(mappedBy = "receiver")
-  private List<MessageModel> receivedMessages;
-
   @ManyToMany
   @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private List<RoleModel> roles;
@@ -96,22 +90,6 @@ public class UserModel {
 
   public void setArticles(List<ArticleModel> articles) {
     this.articles = articles;
-  }
-
-  public List<MessageModel> getSentMessages() {
-    return sentMessages;
-  }
-
-  public void setSentMessages(List<MessageModel> sentMessages) {
-    this.sentMessages = sentMessages;
-  }
-
-  public List<MessageModel> getReceivedMessages() {
-    return receivedMessages;
-  }
-
-  public void setReceivedMessages(List<MessageModel> receivedMessages) {
-    this.receivedMessages = receivedMessages;
   }
 
   public List<RoleModel> getRoles() {

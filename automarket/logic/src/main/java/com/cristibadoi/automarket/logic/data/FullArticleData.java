@@ -1,9 +1,11 @@
 package com.cristibadoi.automarket.logic.data;
 
+import java.util.Date;
 import java.util.List;
 
 public class FullArticleData {
 
+  private long id;
   private int modelYear;
   private int mileage;
   private int price;
@@ -11,7 +13,7 @@ public class FullArticleData {
   private String email;
   private String description;
   private List<String> imageLinks;
-  private int publicationDate;
+  private Date publicationDate;
   private int cylindricalCapacity;
   private String userName;
   private String brandName;
@@ -25,6 +27,14 @@ public class FullArticleData {
 
   public int getModelYear() {
     return modelYear;
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 
   public void setModelYear(int modelYear) {
@@ -71,19 +81,11 @@ public class FullArticleData {
     this.description = description;
   }
 
-  public List<String> getImages() {
-    return imageLinks;
-  }
-
-  public void setImages(List<String> images) {
-    this.imageLinks = images;
-  }
-
-  public int getPublicationDate() {
+  public Date getPublicationDate() {
     return publicationDate;
   }
 
-  public void setPublicationDate(int publicationDate) {
+  public void setPublicationDate(Date publicationDate) {
     this.publicationDate = publicationDate;
   }
 

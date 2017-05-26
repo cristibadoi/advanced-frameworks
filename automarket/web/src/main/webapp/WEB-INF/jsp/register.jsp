@@ -26,9 +26,6 @@
         <li><a href="<c:url value="/login" />"><spring:message code="label.menu-login-button"/></a></li>
         <li><a href="<c:url value="/register" />"><spring:message code="label.menu-register-button"/></a></li>
       </sec:authorize>
-      <sec:authorize access="isAuthenticated()">
-        <li><a href="<c:url value="/messages" />"><spring:message code="label.menu-messages-button"/></a></li>
-      </sec:authorize>
       <li><a href="<c:url value="/publish" />"><spring:message code="label.menu-publish-button"/></a></li>
       <sec:authorize access="isAuthenticated()">
         <li>
