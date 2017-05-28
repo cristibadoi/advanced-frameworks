@@ -11,7 +11,7 @@
 <script src=<c:url value="/webjars/jquery/1.11.1/jquery.min.js"/>></script>
 <script src=<c:url value="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"/>></script>
 <link rel="stylesheet" href=<c:url value="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/> />
-<title><spring:message code="label.results-title" /></title>
+<title><spring:message code="label.account-articles-title" /></title>
 </head>
 
 <body>
@@ -47,14 +47,22 @@
 
   <div class="container">
     <h1>
-      <spring:message code="label.results-header" />
+      <spring:message code="label.account-articles-header" />
     </h1>
     <h2 class="lead">
-      <strong class="text-danger"><spring:message code="label.results-found" /></strong> ${results.size()}
+      <strong class="text-danger"><spring:message code="label.account-current" /></strong> ${username}
+    </h2>
+    <h4>
+      <spring:message code="label.account-info" />
+      <br>
+      <spring:message code="label.account-please" />
+    </h4>
+    <h2 class="lead">
+      <spring:message code="label.account-your-articles" />
     </h2>
 
     <section class="col-xs-12 col-sm-6 col-md-12">
-      <c:forEach items="${results}" var="element">
+      <c:forEach items="${articles}" var="element">
         <fmt:formatDate value="${element.publicationDate}" type="both" dateStyle="medium" timeStyle="short"
           var="publicationDate"></fmt:formatDate>
         <article class="search-result row">
@@ -83,6 +91,18 @@
                   <li><strong><spring:message code="label.results-fuel" /></strong>&nbsp${element.fuelName}</li>
                 </ul>
               </li>
+              <li>
+                  <ul class="list-unstyled">
+                    <li><a href="/account/articles/delete/${element.id}?action=delete"><button type="button"
+                          class="btn btn-primary">
+                          <spring:message code="label.account-delete-button" />
+                        </button></a></li>
+                    <li><a href="/account/articles/delete/${element.id}?action=sold"><button type="button"
+                          class="btn btn-success">
+                          <spring:message code="label.account-sold-button" />
+                        </button></a></li>
+                  </ul>
+              </li>
             </ul>
           </div>
         </article>
@@ -90,7 +110,6 @@
 
     </section>
   </div>
-
 </body>
 
 </html>

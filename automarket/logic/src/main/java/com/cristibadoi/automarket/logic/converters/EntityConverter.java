@@ -6,6 +6,6 @@ public interface EntityConverter <M, D> {
 
   D convertModelToData(M model);
   
-  List<D> convertModelToDataList(List<M> list);
+  List<D> convertModelListToDataList(List<M> list);
   
 }

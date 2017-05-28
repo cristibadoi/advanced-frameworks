@@ -44,7 +44,7 @@ public class FullArticleConverter implements EntityConverter<ArticleModel, FullA
   }
 
   @Override
-  public List<FullArticleData> convertModelToDataList(List<ArticleModel> list) {
+  public List<FullArticleData> convertModelListToDataList(List<ArticleModel> list) {
 
     List<FullArticleData> result = new LinkedList<FullArticleData>();
     for (ArticleModel a : list) {

@@ -20,6 +20,7 @@
     <intercept-url pattern="/article" access="permitAll"/>
     <intercept-url pattern="/images" access="permitAll"/>
     <intercept-url pattern="/publish" access="isAuthenticated()"/>
+    <intercept-url pattern="/account" access="isAuthenticated()"/>
 
     <form-login login-page="/login" default-target-url="/"
                 authentication-failure-url="/login?error"/>
