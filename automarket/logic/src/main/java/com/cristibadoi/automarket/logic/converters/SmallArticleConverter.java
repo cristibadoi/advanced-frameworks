@@ -39,7 +39,7 @@ public class SmallArticleConverter implements EntityConverter<ArticleModel, Smal
   }
 
   @Override
-  public List<SmallArticleData> convertModelToDataList(List<ArticleModel> list) {
+  public List<SmallArticleData> convertModelListToDataList(List<ArticleModel> list) {
 
     List<SmallArticleData> smallArticleDataList = new ArrayList<SmallArticleData>();
     for (ArticleModel articleModel : list) {

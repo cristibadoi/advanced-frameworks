@@ -48,10 +48,10 @@ public class ArticleServiceImpl implements ArticleService {
   @Transactional(readOnly = true)
   public List<FullArticleData> getMatchingFullArticles(QueryInput queryInput) {
 
-    List<ArticleModel> results = Lists.newArrayList(
-        articleRepository.findAll(articlePredicates.createPredicate(queryInput)));
+    List<ArticleModel> results = Lists
+        .newArrayList(articleRepository.findAll(articlePredicates.createArticleSearchPredicate(queryInput)));
 
-    return fullArticleConverter.convertModelToDataList(results);
+    return fullArticleConverter.convertModelListToDataList(results);
 
   }
 
@@ -60,7 +60,7 @@ public class ArticleServiceImpl implements ArticleService {
   public FullArticleData getFullArticleById(long id) throws ArticleNotFoundException {
 
     ArticleModel result = articleRepository.findById(id);
-    if (result == null) {
+    if (result == null || !result.getStatus().getName().equals(ServiceLayerConstants.ARTICLE_STATUS_ACTIVE)) {
       throw new ArticleNotFoundException(ServiceLayerConstants.ARTICLE_NOT_FOUND_MESSAGE);
     }
 
@@ -72,10 +72,10 @@ public class ArticleServiceImpl implements ArticleService {
   @Transactional(readOnly = true)
   public List<SmallArticleData> getMatchingSmallArticles(QueryInput queryInput) {
 
-    List<ArticleModel> results = Lists.newArrayList(
-        articleRepository.findAll(articlePredicates.createPredicate(queryInput)));
+    List<ArticleModel> results = Lists
+        .newArrayList(articleRepository.findAll(articlePredicates.createArticleSearchPredicate(queryInput)));
 
-    return smallArticleConverter.convertModelToDataList(results);
+    return smallArticleConverter.convertModelListToDataList(results);
 
   }
 
@@ -84,11 +84,22 @@ public class ArticleServiceImpl implements ArticleService {
   public SmallArticleData getSmallArticleById(long id) throws ArticleNotFoundException {
 
     ArticleModel result = articleRepository.findById(id);
-    if (result == null) {
+    if (result == null || !result.getStatus().getName().equals(ServiceLayerConstants.ARTICLE_STATUS_ACTIVE)) {
       throw new ArticleNotFoundException(ServiceLayerConstants.ARTICLE_NOT_FOUND_MESSAGE);
     }
 
     return smallArticleConverter.convertModelToData(result);
+
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List<SmallArticleData> getSmallArticlesByAuthor(String authorUsername) {
+
+    List<ArticleModel> results = Lists
+        .newArrayList(articleRepository.findAll(articlePredicates.createUserPredicate(authorUsername)));
+
+    return smallArticleConverter.convertModelListToDataList(results);
 
   }
 
@@ -131,15 +142,15 @@ public class ArticleServiceImpl implements ArticleService {
   @Override
   @Transactional
   public void deleteArticle(long id, String action) throws UnauthorizedException {
-    
+
     User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String username = currentUser.getUsername();
     ArticleModel article = articleRepository.findById(id);
-    
+
     if (!article.getUser().getUsername().equals(username)) {
       throw new UnauthorizedException(ServiceLayerConstants.UNAUTHORIZED_MESSAGE);
     }
-    
+
     if (action.equalsIgnoreCase(ServiceLayerConstants.ARTICLE_ACTION_DELETE)) {
       article.setStatus(modelExtractor.findStatusByName(ServiceLayerConstants.ARTICLE_STATUS_DELETED));
       articleRepository.save(article);
@@ -148,7 +159,7 @@ public class ArticleServiceImpl implements ArticleService {
       article.setStatus(modelExtractor.findStatusByName(ServiceLayerConstants.ARTICLE_STATUS_SOLD));
       articleRepository.save(article);
     }
-    
+
   }
 
 }

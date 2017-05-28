@@ -17,6 +17,8 @@ public interface ArticleService {
   List<FullArticleData> getMatchingFullArticles(QueryInput queryInput);
 
   SmallArticleData getSmallArticleById(long id) throws ArticleNotFoundException;
+  
+  List<SmallArticleData> getSmallArticlesByAuthor(String authorUsername);
 
   List<SmallArticleData> getMatchingSmallArticles(QueryInput queryInput);
 

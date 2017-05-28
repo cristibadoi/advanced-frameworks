@@ -11,7 +11,7 @@ import com.cristibadoi.automarket.web.exceptions.InvalidPublishInputException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,28 +50,30 @@ public class PublishController {
 
   @PostMapping
   public ModelAndView redirectAsModelAttribute(@RequestParam String brand, @RequestParam String model,
-                                               @RequestParam String type,
-                                               @RequestParam String fuel, @RequestParam Integer year,
-                                               @RequestParam Integer capacity, @RequestParam Integer mileage,
-                                               @RequestParam String description, @RequestParam Integer price,
-                                               @RequestParam String city, @RequestParam String phone,
-                                               @RequestParam String email,
-                                               @RequestParam MultipartFile[] images, RedirectAttributes redirectAttributes) {
+      @RequestParam String type, @RequestParam String fuel, @RequestParam Integer year, @RequestParam Integer capacity,
+      @RequestParam Integer mileage, @RequestParam String description, @RequestParam Integer price,
+      @RequestParam String city, @RequestParam String phone, @RequestParam String email,
+      @RequestParam MultipartFile[] images, RedirectAttributes redirectAttributes) throws InvalidPublishInputException {
 
     PublishInput publishInput = new PublishInput();
-    publishInput.setBrand(brand);
-    publishInput.setModel(model);
-    publishInput.setType(type);
-    publishInput.setFuel(fuel);
-    publishInput.setYear(year);
-    publishInput.setCapacity(capacity);
-    publishInput.setMileage(mileage);
-    publishInput.setDescription(description);
-    publishInput.setPrice(price);
-    publishInput.setCity(city);
-    publishInput.setPhone(phone);
-    publishInput.setEmail(email);
-    publishInput.setImages(images);
+    try {
+      publishInput.setBrand(brand);
+      publishInput.setModel(model);
+      publishInput.setType(type);
+      publishInput.setFuel(fuel);
+      publishInput.setYear(year);
+      publishInput.setCapacity(capacity);
+      publishInput.setMileage(mileage);
+      publishInput.setDescription(description);
+      publishInput.setPrice(price);
+      publishInput.setCity(city);
+      publishInput.setPhone(phone);
+      publishInput.setEmail(email);
+      publishInput.setImages(images);
+    } catch (Exception e) {
+      // TODO log all errors
+      throw new InvalidPublishInputException(WebLayerConstants.INVALID_PUBLISH_INPUT_MESSAGE);
+    }
 
     ModelAndView redirect = new ModelAndView("redirect:/publish/finalize");
     redirectAttributes.addFlashAttribute("publishInput", publishInput);
@@ -85,7 +87,7 @@ public class PublishController {
     publishInputValidator.validate(publishInput, result);
 
     if (result.hasErrors()) {
-      //TODO log all errors
+      // TODO log all errors
       throw new InvalidPublishInputException(WebLayerConstants.INVALID_PUBLISH_INPUT_MESSAGE);
     }
 
