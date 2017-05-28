@@ -151,7 +151,7 @@ public class PublishInputValidator implements Validator {
       try {
         String[] parts = image.getOriginalFilename().split("\\.");
         String imageExtension = parts[1];
-        if (imageExtension.equals("jpeg") || imageExtension.equals("jpg") || imageExtension.equals("png")) {
+        if (imageExtension.equalsIgnoreCase("jpeg") || imageExtension.equalsIgnoreCase("jpg") || imageExtension.equalsIgnoreCase("png")) {
           result = true;
         }
       } catch (IndexOutOfBoundsException e) {

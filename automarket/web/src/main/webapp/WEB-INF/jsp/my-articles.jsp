@@ -93,11 +93,11 @@
               </li>
               <li>
                   <ul class="list-unstyled">
-                    <li><a href="/account/articles/delete/${element.id}?action=delete"><button type="button"
+                    <li><a href="/account/articles/delete/${element.id}?action=delete" onclick="return confirm('Are you sure?')"><button type="button"
                           class="btn btn-primary">
                           <spring:message code="label.account-delete-button" />
                         </button></a></li>
-                    <li><a href="/account/articles/delete/${element.id}?action=sold"><button type="button"
+                    <li><a href="/account/articles/delete/${element.id}?action=sold" onclick="return confirm('Are you sure?')"><button type="button"
                           class="btn btn-success">
                           <spring:message code="label.account-sold-button" />
                         </button></a></li>
