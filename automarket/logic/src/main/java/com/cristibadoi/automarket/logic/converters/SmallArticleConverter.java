@@ -26,7 +26,6 @@ public class SmallArticleConverter implements EntityConverter<ArticleModel, Smal
     smallArticleData.setModelYear(article.getModelYear());
     smallArticleData.setMileage(article.getMileage());
     smallArticleData.setPrice(article.getPrice());
-    smallArticleData.setImageLink(articleImageService.getImageLinks(article).get(0));
     smallArticleData.setPublicationDate(new Date((long) article.getPublicationDate() * 1000));
     smallArticleData.setCylindricalCapacity(article.getCylindricalCapacity());
     smallArticleData.setBrandName(article.getBrand().getName());
@@ -34,6 +33,12 @@ public class SmallArticleConverter implements EntityConverter<ArticleModel, Smal
     smallArticleData.setFuelName(article.getFuel().getName());
     smallArticleData.setCityName(article.getCity().getName());
     smallArticleData.setType(article.getType().getName());
+    try {
+      smallArticleData.setImageLink(articleImageService.getImageLinks(article).get(0));
+    }
+    catch (NullPointerException e) {
+      //TODO log missing images for current article
+    }
 
     return smallArticleData;
   }

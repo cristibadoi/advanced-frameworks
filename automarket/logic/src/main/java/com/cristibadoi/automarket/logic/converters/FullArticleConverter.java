@@ -31,13 +31,18 @@ public class FullArticleConverter implements EntityConverter<ArticleModel, FullA
     result.setDescription(article.getDescription());
     result.setPublicationDate(new Date((long) article.getPublicationDate() * 1000));
     result.setCylindricalCapacity(article.getCylindricalCapacity());
-    result.setImageLinks(articleImageService.getImageLinks(article));
     result.setUserName(article.getUser().getUsername());
     result.setBrandName(article.getBrand().getName());
     result.setModelName(article.getModel().getName());
     result.setFuelName(article.getFuel().getName());
     result.setCityName(article.getCity().getName());
     result.setTypeName(article.getType().getName());
+    try {
+      result.setImageLinks(articleImageService.getImageLinks(article));
+    }
+    catch (NullPointerException e) {
+      //TODO log missing images for current article;
+    }
 
     return result;
 
