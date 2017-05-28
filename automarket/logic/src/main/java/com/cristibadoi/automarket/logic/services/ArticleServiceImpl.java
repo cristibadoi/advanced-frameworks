@@ -5,7 +5,7 @@ import com.cristibadoi.automarket.logic.converters.EntityConverter;
 import com.cristibadoi.automarket.logic.data.FullArticleData;
 import com.cristibadoi.automarket.logic.data.SmallArticleData;
 import com.cristibadoi.automarket.logic.exceptions.ArticleNotFoundException;
-import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
+import com.cristibadoi.automarket.logic.exceptions.UnauthorizedException;
 import com.cristibadoi.automarket.logic.exceptions.UploadFailureException;
 import com.cristibadoi.automarket.logic.input.ArticlePredicates;
 import com.cristibadoi.automarket.logic.input.PublishInput;
@@ -20,7 +20,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -47,14 +46,10 @@ public class ArticleServiceImpl implements ArticleService {
 
   @Override
   @Transactional(readOnly = true)
-  public List<FullArticleData> getMatchingFullArticles(QueryInput queryInput) throws NoResultsFoundException {
+  public List<FullArticleData> getMatchingFullArticles(QueryInput queryInput) {
 
     List<ArticleModel> results = Lists.newArrayList(
         articleRepository.findAll(articlePredicates.createPredicate(queryInput)));
-
-    if (results.isEmpty()) {
-      throw new NoResultsFoundException(ServiceLayerConstants.NO_MATCHING_RESULTS_MESSAGE);
-    }
 
     return fullArticleConverter.convertModelToDataList(results);
 
@@ -75,14 +70,10 @@ public class ArticleServiceImpl implements ArticleService {
 
   @Override
   @Transactional(readOnly = true)
-  public List<SmallArticleData> getMatchingSmallArticles(QueryInput queryInput) throws NoResultsFoundException {
+  public List<SmallArticleData> getMatchingSmallArticles(QueryInput queryInput) {
 
     List<ArticleModel> results = Lists.newArrayList(
         articleRepository.findAll(articlePredicates.createPredicate(queryInput)));
-
-    if (results.isEmpty()) {
-      throw new NoResultsFoundException(ServiceLayerConstants.NO_MATCHING_RESULTS_MESSAGE);
-    }
 
     return smallArticleConverter.convertModelToDataList(results);
 
@@ -115,7 +106,7 @@ public class ArticleServiceImpl implements ArticleService {
     article.setType(modelExtractor.findTypeByName(publishInput.getType()));
     article.setFuel(modelExtractor.findFuelByName(publishInput.getFuel()));
     article.setCity(modelExtractor.findCityByName(publishInput.getCity()));
-    article.setStatus(modelExtractor.findStatusByName(ServiceLayerConstants.POST_STATUS_ACTIVE));
+    article.setStatus(modelExtractor.findStatusByName(ServiceLayerConstants.ARTICLE_STATUS_ACTIVE));
     article.setModelYear(publishInput.getYear());
     article.setCylindricalCapacity(publishInput.getCapacity());
     article.setMileage(publishInput.getMileage());
@@ -126,7 +117,6 @@ public class ArticleServiceImpl implements ArticleService {
     article.setPublicationDate((int) unixTime);
     article = articleRepository.save(article);
 
-    File folder = new File(ServiceLayerConstants.IMAGES_PARENT_FOLDER + File.separator + article.getId());
     try {
       articleImageService.uploadImages(article, publishInput.getImages());
     } catch (UploadFailureException e) {
@@ -136,6 +126,29 @@ public class ArticleServiceImpl implements ArticleService {
 
     articleRepository.save(article);
 
+  }
+
+  @Override
+  @Transactional
+  public void deleteArticle(long id, String action) throws UnauthorizedException {
+    
+    User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String username = currentUser.getUsername();
+    ArticleModel article = articleRepository.findById(id);
+    
+    if (!article.getUser().getUsername().equals(username)) {
+      throw new UnauthorizedException(ServiceLayerConstants.UNAUTHORIZED_MESSAGE);
+    }
+    
+    if (action.equalsIgnoreCase(ServiceLayerConstants.ARTICLE_ACTION_DELETE)) {
+      article.setStatus(modelExtractor.findStatusByName(ServiceLayerConstants.ARTICLE_STATUS_DELETED));
+      articleRepository.save(article);
+    }
+    if (action.equalsIgnoreCase(ServiceLayerConstants.ARTICLE_ACTION_MARK_AS_SOLD)) {
+      article.setStatus(modelExtractor.findStatusByName(ServiceLayerConstants.ARTICLE_STATUS_SOLD));
+      articleRepository.save(article);
+    }
+    
   }
 
 }

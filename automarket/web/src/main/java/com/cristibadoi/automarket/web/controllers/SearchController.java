@@ -1,7 +1,6 @@
 package com.cristibadoi.automarket.web.controllers;
 
 import com.cristibadoi.automarket.logic.data.SmallArticleData;
-import com.cristibadoi.automarket.logic.exceptions.NoResultsFoundException;
 import com.cristibadoi.automarket.logic.input.QueryInput;
 import com.cristibadoi.automarket.logic.services.ArticleImageService;
 import com.cristibadoi.automarket.logic.services.ArticleService;
@@ -37,8 +36,7 @@ public class SearchController {
                              @RequestParam(required = false) Integer minPrice,
                              @RequestParam(required = false) Integer maxPrice,
                              @RequestParam(required = false) String currency,
-                             @RequestParam(required = false) String city)
-      throws NoResultsFoundException {
+                             @RequestParam(required = false) String city) {
 
     QueryInput queryInput = new QueryInput();
     if (brand != null && !brand.equals("")) {

@@ -39,7 +39,7 @@ public class RegisterController {
   public ModelAndView register(@ModelAttribute("newUser") UserModel newUser, BindingResult result)
       throws InvalidUserException {
 
-    ModelAndView model = new ModelAndView("redirect:/login");
+    ModelAndView model = new ModelAndView("success");
 
     userValidator.validate(newUser, result);
 
