@@ -3,8 +3,6 @@ package com.cristibadoi.automarket.web.controllers;
 import com.cristibadoi.automarket.global.exceptions.ApplicationException;
 import com.cristibadoi.automarket.web.constants.WebLayerConstants;
 
-import net.bytebuddy.agent.builder.AgentBuilder;
-
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +13,7 @@ public class AppExceptionHandler {
   @ExceptionHandler(ApplicationException.class)
   public ModelAndView handleAllApplicationExceptions(Exception ex) {
 
-    //TODO log exception
+    // TODO log exception
 
     ModelAndView model = new ModelAndView("error");
     model.addObject("message", ex.getMessage());
@@ -25,17 +23,17 @@ public class AppExceptionHandler {
   }
 
   /*
-  @ExceptionHandler(Exception.class)
-  public ModelAndView handleAllExceptions(Exception ex) {
-
-    //TODO log exception
-
-    ModelAndView model = new ModelAndView("error");
-    model.addObject("message", WebLayerConstants.GENERIC_ERROR_MESSAGE);
-
-    return model;
-
-  }
-  */
+   * @ExceptionHandler(Exception.class) public ModelAndView
+   * handleAllExceptions(Exception ex) {
+   * 
+   * //TODO log exception
+   * 
+   * ModelAndView model = new ModelAndView("error"); model.addObject("message",
+   * WebLayerConstants.GENERIC_ERROR_MESSAGE);
+   * 
+   * return model;
+   * 
+   * }
+   */
 
 }
