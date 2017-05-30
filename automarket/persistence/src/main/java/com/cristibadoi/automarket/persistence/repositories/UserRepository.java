@@ -10,4 +10,6 @@ public interface UserRepository extends CrudRepository<UserModel, Long> {
 
   UserModel findByUsername(String username);
 
+  UserModel findById(long id);
+
 }

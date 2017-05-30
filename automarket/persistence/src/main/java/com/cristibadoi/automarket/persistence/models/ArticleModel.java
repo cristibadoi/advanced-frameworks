@@ -219,43 +219,4 @@ public class ArticleModel {
     return true;
   }
 
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("ArticleModel [id=");
-    builder.append(id);
-    builder.append(", modelYear=");
-    builder.append(modelYear);
-    builder.append(", mileage=");
-    builder.append(mileage);
-    builder.append(", price=");
-    builder.append(price);
-    builder.append(", phoneNumber=");
-    builder.append(phoneNumber);
-    builder.append(", email=");
-    builder.append(email);
-    builder.append(", description=");
-    builder.append(description);
-    builder.append(", cylindricalCapacity=");
-    builder.append(cylindricalCapacity);
-    builder.append(", publicationDate=");
-    builder.append(publicationDate);
-    builder.append(", user=");
-    builder.append(user);
-    builder.append(", brand=");
-    builder.append(brand);
-    builder.append(", model=");
-    builder.append(model);
-    builder.append(", type=");
-    builder.append(type);
-    builder.append(", fuel=");
-    builder.append(fuel);
-    builder.append(", city=");
-    builder.append(city);
-    builder.append(", status=");
-    builder.append(status);
-    builder.append("]");
-    return builder.toString();
-  }
-
 }

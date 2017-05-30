@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cristibadoi.automarket.logic.data.SmallArticleData;
 import com.cristibadoi.automarket.logic.exceptions.UnauthorizedException;
 import com.cristibadoi.automarket.logic.services.ArticleService;
+import com.cristibadoi.automarket.web.constants.WebLayerConstants;
 
 @Controller
 @RequestMapping("/account")

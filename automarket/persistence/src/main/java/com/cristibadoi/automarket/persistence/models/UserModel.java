@@ -24,6 +24,9 @@ public class UserModel {
   @Column(nullable = false, columnDefinition = "TINYINT(1)")
   private boolean enabled;
 
+  @Column(nullable = false)
+  private String confirmationCode;
+
   @OneToMany(mappedBy = "user")
   private List<ArticleModel> articles;
 
@@ -32,10 +35,6 @@ public class UserModel {
   private List<RoleModel> roles;
 
   public UserModel() {
-  }
-
-  public UserModel(String username) {
-    this.username = username;
   }
 
   public UserModel(String username, String password, String email) {
@@ -84,6 +83,14 @@ public class UserModel {
     this.enabled = enabled;
   }
 
+  public String getConfirmationCode() {
+    return confirmationCode;
+  }
+
+  public void setConfirmationCode(String confirmationCode) {
+    this.confirmationCode = confirmationCode;
+  }
+
   public List<ArticleModel> getArticles() {
     return articles;
   }
@@ -124,23 +131,6 @@ public class UserModel {
       return false;
     }
     return true;
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("UserModel [id=");
-    builder.append(id);
-    builder.append(", email=");
-    builder.append(email);
-    builder.append(", username=");
-    builder.append(username);
-    builder.append(", password=");
-    builder.append(password);
-    builder.append(", enabled=");
-    builder.append(enabled);
-    builder.append("]");
-    return builder.toString();
   }
 
 }

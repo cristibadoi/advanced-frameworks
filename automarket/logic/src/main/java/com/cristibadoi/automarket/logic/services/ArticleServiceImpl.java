@@ -7,7 +7,6 @@ import com.cristibadoi.automarket.logic.data.SmallArticleData;
 import com.cristibadoi.automarket.logic.exceptions.ArticleNotFoundException;
 import com.cristibadoi.automarket.logic.exceptions.UnauthorizedException;
 import com.cristibadoi.automarket.logic.exceptions.UploadFailureException;
-import com.cristibadoi.automarket.logic.input.ArticlePredicates;
 import com.cristibadoi.automarket.logic.input.PublishInput;
 import com.cristibadoi.automarket.logic.input.QueryInput;
 import com.cristibadoi.automarket.persistence.models.ArticleModel;
@@ -36,7 +35,7 @@ public class ArticleServiceImpl implements ArticleService {
   private EntityConverter<ArticleModel, SmallArticleData> smallArticleConverter;
 
   @Autowired
-  private ArticlePredicates articlePredicates;
+  private ArticlePredicatesServiceImpl articlePredicatesServiceImpl;
 
   @Autowired
   private ArticleImageService articleImageService;
@@ -44,12 +43,15 @@ public class ArticleServiceImpl implements ArticleService {
   @Autowired
   private ModelExtractorService modelExtractor;
 
+  @Autowired
+  private UserService userService;
+
   @Override
   @Transactional(readOnly = true)
   public List<FullArticleData> getMatchingFullArticles(QueryInput queryInput) {
 
     List<ArticleModel> results = Lists
-        .newArrayList(articleRepository.findAll(articlePredicates.createArticleSearchPredicate(queryInput)));
+        .newArrayList(articleRepository.findAll(articlePredicatesServiceImpl.createArticleSearchPredicate(queryInput)));
 
     return fullArticleConverter.convertModelListToDataList(results);
 
@@ -73,7 +75,7 @@ public class ArticleServiceImpl implements ArticleService {
   public List<SmallArticleData> getMatchingSmallArticles(QueryInput queryInput) {
 
     List<ArticleModel> results = Lists
-        .newArrayList(articleRepository.findAll(articlePredicates.createArticleSearchPredicate(queryInput)));
+        .newArrayList(articleRepository.findAll(articlePredicatesServiceImpl.createArticleSearchPredicate(queryInput)));
 
     return smallArticleConverter.convertModelListToDataList(results);
 
@@ -97,7 +99,7 @@ public class ArticleServiceImpl implements ArticleService {
   public List<SmallArticleData> getSmallArticlesByAuthor(String authorUsername) {
 
     List<ArticleModel> results = Lists
-        .newArrayList(articleRepository.findAll(articlePredicates.createUserPredicate(authorUsername)));
+        .newArrayList(articleRepository.findAll(articlePredicatesServiceImpl.createUserPredicate(authorUsername)));
 
     return smallArticleConverter.convertModelListToDataList(results);
 
@@ -111,7 +113,7 @@ public class ArticleServiceImpl implements ArticleService {
     long unixTime = new Date().getTime() / 1000;
 
     ArticleModel article = new ArticleModel();
-    article.setUser(modelExtractor.findUserByUsername(currentUser.getUsername()));
+    article.setUser(userService.getUserByUsername(currentUser.getUsername()));
     article.setBrand(modelExtractor.findBrandByName(publishInput.getBrand()));
     article.setModel(modelExtractor.findModelByName(publishInput.getModel()));
     article.setType(modelExtractor.findTypeByName(publishInput.getType()));
@@ -155,6 +157,7 @@ public class ArticleServiceImpl implements ArticleService {
       article.setStatus(modelExtractor.findStatusByName(ServiceLayerConstants.ARTICLE_STATUS_DELETED));
       articleRepository.save(article);
     }
+
     if (action.equalsIgnoreCase(ServiceLayerConstants.ARTICLE_ACTION_MARK_AS_SOLD)) {
       article.setStatus(modelExtractor.findStatusByName(ServiceLayerConstants.ARTICLE_STATUS_SOLD));
       articleRepository.save(article);

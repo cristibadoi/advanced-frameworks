@@ -93,7 +93,7 @@ public class PublishController {
     articleService.saveArticle(publishInput);
 
     ModelAndView view = new ModelAndView("success");
-    view.addObject("message", WebLayerConstants.POST_PUBLISH_SUCCESS);
+    view.addObject("message", WebLayerConstants.POST_PUBLISH_SUCCESS_MESSAGE);
 
     return view;
 

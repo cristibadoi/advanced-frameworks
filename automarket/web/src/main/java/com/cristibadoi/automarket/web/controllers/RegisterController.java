@@ -1,9 +1,9 @@
 package com.cristibadoi.automarket.web.controllers;
 
-import com.cristibadoi.automarket.authentication.InvalidUserException;
-import com.cristibadoi.automarket.authentication.UserConstants;
-import com.cristibadoi.automarket.authentication.UserService;
-import com.cristibadoi.automarket.authentication.UserValidator;
+import com.cristibadoi.automarket.logic.constants.ServiceLayerConstants;
+import com.cristibadoi.automarket.logic.exceptions.EmailSendingFailureException;
+import com.cristibadoi.automarket.logic.services.UserService;
+import com.cristibadoi.automarket.logic.validators.UserValidator;
 import com.cristibadoi.automarket.persistence.models.UserModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,19 +37,22 @@ public class RegisterController {
 
   @PostMapping
   public ModelAndView register(@ModelAttribute("newUser") UserModel newUser, BindingResult result)
-      throws InvalidUserException {
+      throws EmailSendingFailureException {
 
-    ModelAndView model = new ModelAndView("success");
+    ModelAndView model;
 
     userValidator.validate(newUser, result);
 
     if (result.hasErrors()) {
       //TODO log specific errors
-      throw new InvalidUserException(UserConstants.INVALID_USER);
+      model = new ModelAndView("register");
+      model.addObject("message", ServiceLayerConstants.INVALID_USER_MESSAGE);
+      return model;
     }
 
-    userService.save(newUser);
-
+    userService.registerUser(newUser);
+    model = new ModelAndView("success");
+    model.addObject("message", ServiceLayerConstants.ACCOUNT_CREATION_SUCCESS_MESSAGE);
     return model;
 
   }
