@@ -37,6 +37,14 @@
       <artifactId>guava</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>javax.mail-api</artifactId>
+    </dependency>
+    <dependency>
       <groupId>cristibadoi</groupId>
       <artifactId>persistence</artifactId>
       <version>0.0.1-SNAPSHOT</version>

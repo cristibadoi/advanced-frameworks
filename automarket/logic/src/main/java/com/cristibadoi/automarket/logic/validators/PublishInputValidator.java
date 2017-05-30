@@ -1,6 +1,6 @@
 package com.cristibadoi.automarket.logic.validators;
 
-import com.cristibadoi.automarket.global.constants.GlobalConstants;
+import com.cristibadoi.automarket.logic.constants.ServiceLayerConstants;
 import com.cristibadoi.automarket.logic.input.PublishInput;
 import com.cristibadoi.automarket.logic.services.ModelExtractorService;
 
@@ -142,7 +142,7 @@ public class PublishInputValidator implements Validator {
   }
 
   private boolean validateEmail(String email) {
-    return GlobalConstants.EMAIL_REGEX.matcher(email).matches();
+    return ServiceLayerConstants.EMAIL_REGEX.matcher(email).matches();
   }
 
   private boolean validateImageExtensions(MultipartFile[] images) {
@@ -151,7 +151,8 @@ public class PublishInputValidator implements Validator {
       try {
         String[] parts = image.getOriginalFilename().split("\\.");
         String imageExtension = parts[1];
-        if (imageExtension.equalsIgnoreCase("jpeg") || imageExtension.equalsIgnoreCase("jpg") || imageExtension.equalsIgnoreCase("png")) {
+        if (imageExtension.equalsIgnoreCase("jpeg") || imageExtension.equalsIgnoreCase("jpg") || imageExtension
+            .equalsIgnoreCase("png")) {
           result = true;
         }
       } catch (IndexOutOfBoundsException e) {

@@ -43,6 +43,9 @@ public class ArticleServiceImpl implements ArticleService {
   @Autowired
   private ModelExtractorService modelExtractor;
 
+  @Autowired
+  private UserService userService;
+
   @Override
   @Transactional(readOnly = true)
   public List<FullArticleData> getMatchingFullArticles(QueryInput queryInput) {
@@ -110,7 +113,7 @@ public class ArticleServiceImpl implements ArticleService {
     long unixTime = new Date().getTime() / 1000;
 
     ArticleModel article = new ArticleModel();
-    article.setUser(modelExtractor.findUserByUsername(currentUser.getUsername()));
+    article.setUser(userService.getUserByUsername(currentUser.getUsername()));
     article.setBrand(modelExtractor.findBrandByName(publishInput.getBrand()));
     article.setModel(modelExtractor.findModelByName(publishInput.getModel()));
     article.setType(modelExtractor.findTypeByName(publishInput.getType()));
@@ -154,6 +157,7 @@ public class ArticleServiceImpl implements ArticleService {
       article.setStatus(modelExtractor.findStatusByName(ServiceLayerConstants.ARTICLE_STATUS_DELETED));
       articleRepository.save(article);
     }
+
     if (action.equalsIgnoreCase(ServiceLayerConstants.ARTICLE_ACTION_MARK_AS_SOLD)) {
       article.setStatus(modelExtractor.findStatusByName(ServiceLayerConstants.ARTICLE_STATUS_SOLD));
       articleRepository.save(article);

@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   @Transactional(readOnly = true)
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-    UserModel user = userService.findByUsername(username);
+    UserModel user = userService.getUserByUsername(username);
     List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
     for (RoleModel role : user.getRoles()) {
       grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
@@ -34,12 +34,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     User userToBeReturned;
     if (user.isEnabled()) {
-      userToBeReturned =  new User(user.getUsername(), user.getPassword(), true, true, true, true, grantedAuthorities);
+      userToBeReturned = new User(user.getUsername(), user.getPassword(), true, true, true, true, grantedAuthorities);
+    } else {
+      userToBeReturned = new User(user.getUsername(), user.getPassword(), false, true, true, true, grantedAuthorities);
     }
-    else {
-      userToBeReturned =  new User(user.getUsername(), user.getPassword(), false, true, true, true, grantedAuthorities);
-    }
-    
+
     return userToBeReturned;
 
   }

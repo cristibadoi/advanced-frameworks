@@ -41,9 +41,9 @@
   </authentication-manager>
 
   <!-- SCANNED PACKAGES -->
-  <context:component-scan base-package="com.cristibadoi.automarket.logic.input" />
   <context:component-scan base-package="com.cristibadoi.automarket.logic.services" />
   <context:component-scan base-package="com.cristibadoi.automarket.logic.converters" />
   <context:component-scan base-package="com.cristibadoi.automarket.logic.validators" />
+  <context:component-scan base-package="com.cristibadoi.automarket.logic.generators" />
 
 </beans:beans>

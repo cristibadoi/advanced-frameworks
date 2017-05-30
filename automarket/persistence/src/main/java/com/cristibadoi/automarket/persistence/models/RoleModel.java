@@ -75,17 +75,4 @@ public class RoleModel {
     return true;
   }
 
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("RoleModel [id=");
-    builder.append(id);
-    builder.append(", name=");
-    builder.append(name);
-    builder.append(", users=");
-    builder.append(users);
-    builder.append("]");
-    return builder.toString();
-  }
-
 }

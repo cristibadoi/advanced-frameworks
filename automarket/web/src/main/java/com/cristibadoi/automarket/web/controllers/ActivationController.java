@@ -1,5 +1,6 @@
 package com.cristibadoi.automarket.web.controllers;
 
+import com.cristibadoi.automarket.logic.exceptions.InvalidActivationCode;
 import com.cristibadoi.automarket.logic.services.AccountActivationService;
 import com.cristibadoi.automarket.web.constants.WebLayerConstants;
 
@@ -12,13 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/activation/")
-public class EmailConfirmationController {
+public class ActivationController {
 
   @Autowired
-  AccountActivationService accountActivationService;
+  private AccountActivationService accountActivationService;
 
   @GetMapping("/{accountId}/{activationCode}")
-  public ModelAndView confirmEmail(@PathVariable("accountId") long accountId, @PathVariable("activationCode") String activationCode) {
+  public ModelAndView confirmEmail(@PathVariable("accountId") long accountId,
+                                   @PathVariable("activationCode") String activationCode)
+      throws InvalidActivationCode {
 
     accountActivationService.activateAccount(accountId, activationCode);
 
