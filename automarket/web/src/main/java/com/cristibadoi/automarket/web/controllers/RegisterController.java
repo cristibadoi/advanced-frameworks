@@ -1,9 +1,9 @@
 package com.cristibadoi.automarket.web.controllers;
 
-import com.cristibadoi.automarket.authentication.InvalidUserException;
-import com.cristibadoi.automarket.authentication.UserConstants;
-import com.cristibadoi.automarket.authentication.UserService;
-import com.cristibadoi.automarket.authentication.UserValidator;
+import com.cristibadoi.automarket.logic.exceptions.InvalidUserException;
+import com.cristibadoi.automarket.logic.constants.UserConstants;
+import com.cristibadoi.automarket.logic.services.UserService;
+import com.cristibadoi.automarket.logic.validators.UserValidator;
 import com.cristibadoi.automarket.persistence.models.UserModel;
 
 import org.springframework.beans.factory.annotation.Autowired;

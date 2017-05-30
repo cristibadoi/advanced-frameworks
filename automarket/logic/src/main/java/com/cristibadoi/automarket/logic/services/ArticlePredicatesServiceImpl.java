@@ -1,16 +1,18 @@
-package com.cristibadoi.automarket.logic.input;
+package com.cristibadoi.automarket.logic.services;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.cristibadoi.automarket.logic.constants.ServiceLayerConstants;
+import com.cristibadoi.automarket.logic.input.QueryInput;
 import com.cristibadoi.automarket.persistence.models.QArticleModel;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
-@Component
-public class ArticlePredicates {
+@Service
+public class ArticlePredicatesServiceImpl implements ArticlePredicatesService{
 
-  public ArticlePredicates() {
+  public ArticlePredicatesServiceImpl() {
   }
 
   public Predicate createArticleSearchPredicate(QueryInput queryInput) {

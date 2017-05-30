@@ -1,4 +1,4 @@
-package com.cristibadoi.automarket.authentication;
+package com.cristibadoi.automarket.logic.validators;
 
 import com.cristibadoi.automarket.global.constants.GlobalConstants;
 import com.cristibadoi.automarket.persistence.models.UserModel;

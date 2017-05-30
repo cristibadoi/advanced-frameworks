@@ -7,7 +7,6 @@ import com.cristibadoi.automarket.logic.data.SmallArticleData;
 import com.cristibadoi.automarket.logic.exceptions.ArticleNotFoundException;
 import com.cristibadoi.automarket.logic.exceptions.UnauthorizedException;
 import com.cristibadoi.automarket.logic.exceptions.UploadFailureException;
-import com.cristibadoi.automarket.logic.input.ArticlePredicates;
 import com.cristibadoi.automarket.logic.input.PublishInput;
 import com.cristibadoi.automarket.logic.input.QueryInput;
 import com.cristibadoi.automarket.persistence.models.ArticleModel;
@@ -36,7 +35,7 @@ public class ArticleServiceImpl implements ArticleService {
   private EntityConverter<ArticleModel, SmallArticleData> smallArticleConverter;
 
   @Autowired
-  private ArticlePredicates articlePredicates;
+  private ArticlePredicatesServiceImpl articlePredicatesServiceImpl;
 
   @Autowired
   private ArticleImageService articleImageService;
@@ -49,7 +48,7 @@ public class ArticleServiceImpl implements ArticleService {
   public List<FullArticleData> getMatchingFullArticles(QueryInput queryInput) {
 
     List<ArticleModel> results = Lists
-        .newArrayList(articleRepository.findAll(articlePredicates.createArticleSearchPredicate(queryInput)));
+        .newArrayList(articleRepository.findAll(articlePredicatesServiceImpl.createArticleSearchPredicate(queryInput)));
 
     return fullArticleConverter.convertModelListToDataList(results);
 
@@ -73,7 +72,7 @@ public class ArticleServiceImpl implements ArticleService {
   public List<SmallArticleData> getMatchingSmallArticles(QueryInput queryInput) {
 
     List<ArticleModel> results = Lists
-        .newArrayList(articleRepository.findAll(articlePredicates.createArticleSearchPredicate(queryInput)));
+        .newArrayList(articleRepository.findAll(articlePredicatesServiceImpl.createArticleSearchPredicate(queryInput)));
 
     return smallArticleConverter.convertModelListToDataList(results);
 
@@ -97,7 +96,7 @@ public class ArticleServiceImpl implements ArticleService {
   public List<SmallArticleData> getSmallArticlesByAuthor(String authorUsername) {
 
     List<ArticleModel> results = Lists
-        .newArrayList(articleRepository.findAll(articlePredicates.createUserPredicate(authorUsername)));
+        .newArrayList(articleRepository.findAll(articlePredicatesServiceImpl.createUserPredicate(authorUsername)));
 
     return smallArticleConverter.convertModelListToDataList(results);
 

@@ -1,4 +1,4 @@
-package com.cristibadoi.automarket.authentication;
+package com.cristibadoi.automarket.logic.constants;
 
 public class UserConstants {
 

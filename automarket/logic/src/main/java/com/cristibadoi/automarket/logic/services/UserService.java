@@ -1,4 +1,4 @@
-package com.cristibadoi.automarket.authentication;
+package com.cristibadoi.automarket.logic.services;
 
 import com.cristibadoi.automarket.persistence.models.UserModel;
 

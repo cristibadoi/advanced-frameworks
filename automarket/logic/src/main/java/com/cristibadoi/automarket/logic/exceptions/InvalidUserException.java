@@ -1,4 +1,4 @@
-package com.cristibadoi.automarket.authentication;
+package com.cristibadoi.automarket.logic.exceptions;
 
 import com.cristibadoi.automarket.global.exceptions.ApplicationException;
 
