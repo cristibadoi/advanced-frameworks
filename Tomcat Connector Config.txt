@@ -4,3 +4,7 @@
 		keystorePass="changeit" maxThreads="25" 
 		port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol" 
 		scheme="https" secure="true" sslProtocol="TLS"/>
+		
+Windows CMD key generation command:
+
+keytool -genkey -alias tomcat -keyalg RSA
