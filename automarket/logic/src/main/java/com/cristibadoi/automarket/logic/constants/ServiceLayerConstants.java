@@ -20,7 +20,7 @@ public class ServiceLayerConstants {
   public static final String HOST_CONNECTION_EMAIL = "automarkettestmail@gmail.com";
   public static final String HOST_CONNECTION_PASSWORD = "parolaparola";
   public static final String EMAIL_CONFIRMATION_SUBJECT = "Automarket E-mail Confirmation";
-  public static final String AUTOMARKET_DOMAIN_NAME = "http://localhost:8080";
+  public static final String AUTOMARKET_DOMAIN_NAME = "https://localhost:8443";
   public static final String CONFIRMATION_LINK_BASE = AUTOMARKET_DOMAIN_NAME + "/activation/";
 
   public static final String IMAGE_UPLOAD_FAILURE_MESSAGE = "Your files failed to upload!";

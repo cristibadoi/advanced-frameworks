@@ -13,13 +13,14 @@
 
   <!-- SPRING SECURITY CONFIG -->
   <http auto-config="true" use-expressions="true">
+    <intercept-url pattern="/**" requires-channel="https"/>
     <intercept-url pattern="/" access="permitAll"/>
     <intercept-url pattern="/login" access="isAnonymous()"/>
     <intercept-url pattern="/register" access="permitAll"/>
     <intercept-url pattern="/search" access="permitAll"/>
     <intercept-url pattern="/article" access="permitAll"/>
     <intercept-url pattern="/images" access="permitAll"/>
-    <intercept-url pattern="/activation" access="permitAll" />
+    <intercept-url pattern="/activation" access="permitAll"/>
     <intercept-url pattern="/publish" access="isAuthenticated()"/>
     <intercept-url pattern="/account" access="isAuthenticated()"/>
 
@@ -41,9 +42,9 @@
   </authentication-manager>
 
   <!-- SCANNED PACKAGES -->
-  <context:component-scan base-package="com.cristibadoi.automarket.logic.services" />
-  <context:component-scan base-package="com.cristibadoi.automarket.logic.converters" />
-  <context:component-scan base-package="com.cristibadoi.automarket.logic.validators" />
-  <context:component-scan base-package="com.cristibadoi.automarket.logic.generators" />
+  <context:component-scan base-package="com.cristibadoi.automarket.logic.services"/>
+  <context:component-scan base-package="com.cristibadoi.automarket.logic.converters"/>
+  <context:component-scan base-package="com.cristibadoi.automarket.logic.validators"/>
+  <context:component-scan base-package="com.cristibadoi.automarket.logic.generators"/>
 
 </beans:beans>

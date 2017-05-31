@@ -1,0 +1,6 @@
+<Connector SSLEnabled="true" acceptCount="100" 
+		clientAuth="false" disableUploadTimeout="true" 
+		enableLookups="false" keystoreFile="${catalina.home}/conf/myKeystore.keystore" 
+		keystorePass="changeit" maxThreads="25" 
+		port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol" 
+		scheme="https" secure="true" sslProtocol="TLS"/>
