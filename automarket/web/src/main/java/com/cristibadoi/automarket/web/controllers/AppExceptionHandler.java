@@ -1,8 +1,6 @@
 package com.cristibadoi.automarket.web.controllers;
 
 import com.cristibadoi.automarket.global.exceptions.ApplicationException;
-import com.cristibadoi.automarket.web.constants.WebLayerConstants;
-
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;

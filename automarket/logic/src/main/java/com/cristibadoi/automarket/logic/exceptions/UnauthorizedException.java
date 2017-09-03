@@ -1,6 +1,6 @@
 package com.cristibadoi.automarket.logic.exceptions;
 
-public class UnauthorizedException extends ServiceException{
+public class UnauthorizedException extends ServiceException {
   
   private static final long serialVersionUID = -6502955316866511640L;
 

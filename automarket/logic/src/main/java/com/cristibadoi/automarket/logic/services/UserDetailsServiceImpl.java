@@ -32,13 +32,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
       grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
     }
 
-    User userToBeReturned;
-    if (user.isEnabled()) {
-      userToBeReturned = new User(user.getUsername(), user.getPassword(), true, true, true, true, grantedAuthorities);
-    } else {
-      userToBeReturned = new User(user.getUsername(), user.getPassword(), false, true, true, true, grantedAuthorities);
-    }
-
+    User userToBeReturned = new User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, grantedAuthorities);
+    
     return userToBeReturned;
 
   }

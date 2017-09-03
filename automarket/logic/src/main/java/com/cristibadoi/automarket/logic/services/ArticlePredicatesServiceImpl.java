@@ -1,6 +1,5 @@
 package com.cristibadoi.automarket.logic.services;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.cristibadoi.automarket.logic.constants.ServiceLayerConstants;

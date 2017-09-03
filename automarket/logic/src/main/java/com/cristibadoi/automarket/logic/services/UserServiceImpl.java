@@ -40,8 +40,14 @@ public class UserServiceImpl implements UserService {
     user.setConfirmationCode(activationCodeGenerator.generateActivationCode());
 
     userRepository.save(user);
-
-    accountActivationService.sendConfirmationEmail(user);
+    
+    try {
+      accountActivationService.sendConfirmationEmail(user);
+    }
+    catch (EmailSendingFailureException e) {
+      userRepository.delete(user);
+      throw e;
+    }
 
   }
 

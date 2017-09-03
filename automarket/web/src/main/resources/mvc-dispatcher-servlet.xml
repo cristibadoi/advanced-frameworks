@@ -13,12 +13,10 @@
   <mvc:annotation-driven/>
 
   <!-- WEB RESOURCES MAPPING -->
-
   <mvc:resources mapping="/webjars/**" location="/webjars/"/>
   <mvc:resources mapping="/resources/**" location="/resources/"/>
 
   <!-- JSP VIEW RESOLVER -->
-
   <bean
       class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="prefix" value="/WEB-INF/jsp/"/>
@@ -26,11 +24,9 @@
   </bean>
 
   <!-- SCANNED PACKAGES -->
-
   <context:component-scan base-package="com.cristibadoi.automarket.web.controllers"/>
 
   <!-- INTERNATIONALIZATION -->
-
   <bean id="messageSource"
         class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
     <property name="basename" value="classpath:labels/labels"/>

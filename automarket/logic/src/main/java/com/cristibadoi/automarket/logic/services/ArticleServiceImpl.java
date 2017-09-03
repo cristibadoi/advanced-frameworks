@@ -35,7 +35,7 @@ public class ArticleServiceImpl implements ArticleService {
   private EntityConverter<ArticleModel, SmallArticleData> smallArticleConverter;
 
   @Autowired
-  private ArticlePredicatesServiceImpl articlePredicatesServiceImpl;
+  private ArticlePredicatesService articlePredicatesService;
 
   @Autowired
   private ArticleImageService articleImageService;
@@ -51,7 +51,7 @@ public class ArticleServiceImpl implements ArticleService {
   public List<FullArticleData> getMatchingFullArticles(QueryInput queryInput) {
 
     List<ArticleModel> results = Lists
-        .newArrayList(articleRepository.findAll(articlePredicatesServiceImpl.createArticleSearchPredicate(queryInput)));
+        .newArrayList(articleRepository.findAll(articlePredicatesService.createArticleSearchPredicate(queryInput)));
 
     return fullArticleConverter.convertModelListToDataList(results);
 
@@ -75,7 +75,7 @@ public class ArticleServiceImpl implements ArticleService {
   public List<SmallArticleData> getMatchingSmallArticles(QueryInput queryInput) {
 
     List<ArticleModel> results = Lists
-        .newArrayList(articleRepository.findAll(articlePredicatesServiceImpl.createArticleSearchPredicate(queryInput)));
+        .newArrayList(articleRepository.findAll(articlePredicatesService.createArticleSearchPredicate(queryInput)));
 
     return smallArticleConverter.convertModelListToDataList(results);
 
@@ -99,7 +99,7 @@ public class ArticleServiceImpl implements ArticleService {
   public List<SmallArticleData> getSmallArticlesByAuthor(String authorUsername) {
 
     List<ArticleModel> results = Lists
-        .newArrayList(articleRepository.findAll(articlePredicatesServiceImpl.createUserPredicate(authorUsername)));
+        .newArrayList(articleRepository.findAll(articlePredicatesService.createUserPredicate(authorUsername)));
 
     return smallArticleConverter.convertModelListToDataList(results);
 
